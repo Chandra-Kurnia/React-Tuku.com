@@ -1,0 +1,24 @@
+html, body {
+    font-family: 'CustomFont', metropolis;
+}
+
+.btn-check:focus+.radio-label, .radio-label:focus {
+    box-shadow: 0 0 0 .25rem #DB3022
+}
+
+.btn-check:active+.radio-label, .btn-check:checked+.radio-label, .radio-label.active, .radio-label.dropdown-toggle.show, .radio-label:active {
+    color: #fff;
+    background-color: #DB3022;
+    border-color: #DB3022
+}
+
+.btn-check:active+.radio-label:focus, .btn-check:checked+.radio-label:focus, .radio-label.active:focus, .radio-label.dropdown-toggle.show:focus, .radio-label:active:focus {
+    box-shadow: 0 0 0 .25rem #DB3022
+}
+
+@font-face {
+    font-family: 'metropolis';
+    src: url('../assets/fonts/metropolis.regular-webfont.woff2') format('woff2'), url('../assets/fonts/metropolis.regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}

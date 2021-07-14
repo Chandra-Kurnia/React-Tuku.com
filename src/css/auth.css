@@ -1,0 +1,44 @@
+.switch-auth{
+    border-color: var(--primary);
+    width: 110px;
+}
+
+.container-auth{
+    width: 400px;
+}
+
+.input-auth{
+    width: 20px;
+}
+
+.auth-input-wrapper{
+    width: 350px;
+    height: 48px;
+    margin: auto;
+}
+
+.forgot-pw a{
+    float: right;
+    text-decoration: none;
+    color: var(--primary);
+}
+
+.link-regist a{
+    text-decoration: none;
+    color: var(--primary);
+}
+
+.submit{
+    background-color: var(--primary);
+    width: 92%;
+    height: 48px;
+    color: white;
+    border: 0;
+    border-radius: 20px;
+    font-size: smaller;
+}
+
+.submit:hover{
+    color: white;
+    background-color: var(--primaryHover);
+}
