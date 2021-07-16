@@ -1,0 +1,23 @@
+.buttonAuth{
+    width: 100px;
+}
+
+.login{
+    background-color: var(--primary);
+    color: white;
+}
+
+.login:hover{
+    background-color: var(--primaryHover);
+    color: white;
+}
+
+.signup{
+    background-color: white;
+    border: 1px solid var(--customGrey);
+}
+
+.signup:hover{
+    background-color: var(--primary);
+    color: white;
+}

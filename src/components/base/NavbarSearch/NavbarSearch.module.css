@@ -1,0 +1,25 @@
+.searchInputWrapper{
+    width: 500px;
+}
+.searchInput{
+    width: 445px;
+    height: 35px;
+    border: 1px solid var(--customGrey);
+    border-radius: 20px;
+    border-top-right-radius: 0;
+    border-right: none;
+}
+
+.btnSearch{
+    background-color: white;
+    border: 1px solid var(--customGrey);
+    height: 35px;
+    border-left: none;
+    color: var(--customGrey);
+}
+
+@media (max-width: 575.98px) {
+    .searchInputWrapper{
+        width: 300px;
+    }
+}

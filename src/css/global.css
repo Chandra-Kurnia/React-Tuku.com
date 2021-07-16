@@ -3,7 +3,9 @@ html, body {
 }
 
 .btn-check:focus+.radio-label, .radio-label:focus {
-    box-shadow: 0 0 0 .25rem #DB3022
+    box-shadow: 0 0 0 .25rem #DB3022;
+    background-color: var(--primary);
+    color: white;
 }
 
 .btn-check:active+.radio-label, .btn-check:checked+.radio-label, .radio-label.active, .radio-label.dropdown-toggle.show, .radio-label:active {
@@ -14,6 +16,10 @@ html, body {
 
 .btn-check:active+.radio-label:focus, .btn-check:checked+.radio-label:focus, .radio-label.active:focus, .radio-label.dropdown-toggle.show:focus, .radio-label:active:focus {
     box-shadow: 0 0 0 .25rem #DB3022
+}
+
+.starChecked{
+    color: var(--starChecked);
 }
 
 @font-face {

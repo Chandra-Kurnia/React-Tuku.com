@@ -1,0 +1,21 @@
+.btnCount{
+    width: 30px;
+    height: 30px;
+    border-radius: 20px;
+}
+
+.plus, .minus{
+    font-weight: bold;
+}
+
+.minus{
+    background-color: rgba(146, 146, 146, 0.555);
+}
+
+.plus{
+    padding-left: 8px;
+}
+
+.wrapper span{
+    color: black;
+}

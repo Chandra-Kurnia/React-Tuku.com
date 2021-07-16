@@ -1,11 +1,16 @@
 import './App.css';
 import {BrowserRouter, Route, Switch} from 'react-router-dom'
-import { Login } from './pages/Auth/login/Login';
-import { SignUp } from './pages/Auth/signUp/SignUp';
 import "./css/auth.css";
 import './css/color-pack.css'
+import './css/mobile.css'
+import { Login } from './pages/Auth/login/Login';
+import { SignUp } from './pages/Auth/signUp/SignUp';
 import { ForgotPassword } from './pages/Auth/ForgotPassword/ForgotPassword';
 import { ConfirmPassword } from './pages/Auth/ConfirmPassword/ConfirmPassword';
+import { Home } from './pages/Home/Home';
+import { MyBag } from './pages/Invoice/MyBag/MyBag';
+import { ShowByCategory } from './pages/Products/ShowByCategory/ShowByCategory'
+import { ShowProduct } from './pages/Products/ShowProduct/ShowProduct';
 
 function App() {
   return (
@@ -16,6 +21,10 @@ function App() {
           <Route exact path="/signup" component={SignUp}/>
           <Route exact path="/forgotPassword" component={ForgotPassword}/>
           <Route exact path="/ConfirmPassword" component={ConfirmPassword}/>
+          <Route exact path="/" component={Home}/>
+          <Route exact path="/category/:category" component={ShowByCategory}/>
+          <Route exact path="/MyBag" component={MyBag}/>
+          <Route exact path="/product/:id" component={ShowProduct}/>
         </Route>
       </Switch>
     </BrowserRouter>

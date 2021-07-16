@@ -1,0 +1,23 @@
+.BoxItem{
+    border-radius: 5px;
+    box-shadow: 1px 1px 1px var(--customGrey);
+    font-weight: bold;
+    background-color: white;
+    padding: 20px;
+}
+
+.tittleProduct{
+    color: black;
+    width: 400px;
+}
+
+.ProductShop{
+    color: var(--customGrey);
+}
+
+.price{
+    display: inline-block;
+    width: 30%;
+    text-align: right;
+    color: black;
+}

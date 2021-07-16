@@ -1,0 +1,39 @@
+.btnDelete{
+    position: absolute;
+    background-color: white;
+    border: none;
+    color: var(--primary);
+    right: 15px;
+}
+
+.btnBuy{
+    background-color: var(--primary);
+    color: white;
+}
+
+.btnBuy:hover{
+    background-color: var(--primaryHover);
+    color: white;
+}
+
+.blackText{
+    color: black;
+}
+
+.item{
+    width: 75%;
+}
+
+.sideItem{
+    width: 25%;
+}
+
+@media (max-width: 575.98px) {
+    .item{
+        width: 100%;
+    }
+
+    .sideItem{
+        width: 100%;
+    }
+}
