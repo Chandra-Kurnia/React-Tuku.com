@@ -1,0 +1,16 @@
+.content{
+    background-color: white;
+    height: 550px;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.profile{
+    border-left: 1px solid var(--customGrey);
+    height: 200px;
+}
+
+.profile img{
+    width: 110px;
+    height: 110px;
+}

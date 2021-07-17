@@ -5,7 +5,7 @@ import { Filter } from "../Filter/Filter";
 // eslint-disable-next-line no-unused-vars
 import style from "./NavbarLogin.module.css";
 import { NavbarTrolly } from "../../base/NavbarTrolly/NavbarTrolly";
-import avatar from '../../../assets/images/profiles/avatar/avatar.jpg'
+import avatar from "../../../assets/images/profiles/avatar/avatar.jpg";
 
 export const NavbarLogin = () => {
   return (
@@ -30,10 +30,12 @@ export const NavbarLogin = () => {
           id="navbarNavDropdown"
         >
           {/* <NavbarNavigation/> */}
-          <ul className={`navbar-nav d-flex justify-content-lg-end justify-content-around flex-row pt-lg-0 pt-3 ${style.navItemWrapper}`}>
+          <ul
+            className={`navbar-nav d-flex justify-content-lg-end justify-content-around flex-row pt-lg-0 pt-3 ${style.navItemWrapper}`}
+          >
             <li className="nav-item d-inline-block ps-lg-5 ps-2">
               <a href="#/">
-                <NavbarTrolly margin="me-0"/>
+                <NavbarTrolly margin="me-0" />
               </a>
             </li>
             <li className="nav-item d-inline-block ps-lg-5 ps-2">
@@ -48,7 +50,13 @@ export const NavbarLogin = () => {
             </li>
             <li className="nav-item d-inline-block ps-lg-5 ps-2">
               <a href="#/">
-                <img src={avatar} className={`rounded-circle ${style.imageAvatar}`} alt="" />
+                <label htmlFor="sidebar-toggle">
+                  <img
+                    src={avatar}
+                    className={`rounded-circle ${style.imageAvatar}`}
+                    alt=""
+                  />
+                </label>
               </a>
             </li>
           </ul>

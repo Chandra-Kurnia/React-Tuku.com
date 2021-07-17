@@ -22,6 +22,14 @@ html, body {
     color: var(--starChecked);
 }
 
+.sidebarActive{
+    color: black;
+}
+
+.slick-arrow{
+    display: none;
+}
+
 @font-face {
     font-family: 'metropolis';
     src: url('../assets/fonts/metropolis.regular-webfont.woff2') format('woff2'), url('../assets/fonts/metropolis.regular-webfont.woff') format('woff');

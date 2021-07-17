@@ -1,3 +1,13 @@
-h3, .price, .color{
+h3, .price, .color, .quantity, .size{
     color: black;
+}
+
+.btnBuy{
+    background-color: var(--primary);
+    color: white;
+    border: none;
+}
+
+.btnBuy:hover{
+    background-color: var(--primaryHover);
 }
