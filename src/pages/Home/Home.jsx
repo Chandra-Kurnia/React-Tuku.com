@@ -3,6 +3,7 @@ import { Card } from "../../components/modules/Cards/Card";
 import { Navbar } from "../../components/modules/Navbar/Navbar";
 import { Carousel } from "../../components/modules/Slider/Carousel/Carousel";
 import axios from "axios";
+import { SliderCategory } from "../../components/modules/Slider/SliderCategory/SliderCategory";
 
 export const Home = () => {
   const [data, setData] = useState([]);
@@ -28,7 +29,7 @@ export const Home = () => {
       <section className="container mt-5">
         <h2 className="fw-bold">Category</h2>
         <span>What are you currently looking for</span>
-
+      <SliderCategory/>
         <h2 className="fw-bold">New</h2>
         <span>You've never seen it before!</span>
         <div className="cards d-flex flex-wrap">

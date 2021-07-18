@@ -14,6 +14,19 @@
     --darkBlue: #151867;
     --lightBlue: #4290D8;
     --lightGreen: #42D86C;
+    /* Category color */
+    --seaBlue: #1C3391;
+    --gold: #F67B02;
+    --darkPink: #E31F51;
+    --blueGreen: #57CD9E;
+    --violetBlue: #5650D8;
+    --lemon: #B5D850;
+    --skyBlue: #50C8D8;
+    --violet: #AC50D8;
+    --greenLeave: #53D850;
+    --yellowBlur: #D8BA50;
+    --redBlur: #D85050;
+
 }
 
 /* Color picker */
@@ -73,4 +86,57 @@
 
 .checklightGreen:checked~.colorlightGreen{
     box-shadow: 0px 0px 0px 1px red
+}
+
+
+
+
+
+/* Category */
+.gold{
+    background-color: var(--gold);
+}
+
+.darkPink{
+    background-color: var(--darkPink);
+}
+
+.blueGreen{
+    background-color: var(--blueGreen);
+}
+
+.violetBlue{
+    background-color: var(--violetBlue);
+}
+
+.lemon{
+    background-color: var(--lemon);
+}
+
+.violet{
+    background-color: var(--violet);
+}
+
+.blueBlur{
+    background-color: var(--blueBlur);
+}
+
+.greenLeave{
+    background-color: var(--greenLeave);
+}
+
+.yellowBlur{
+    background-color: var(--yellowBlur);
+}
+
+.skyBlue{
+    background-color: var(--skyBlue);
+}
+
+.redBlur{
+    background-color: var(--redBlur);
+}
+
+.bgWrapper{
+    background-color: var(--bgWrapper);
 }

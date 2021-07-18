@@ -2,8 +2,6 @@ import React from "react";
 import Slider from "react-slick";
 import { SliderItem } from "../../../base/SliderItem/SliderItem";
 import style from "./Carousel.module.css";
-// import "~slick-carousel/slick/slick.css";
-// import "~slick-carousel/slick/slick-theme.css";
 import item1 from '../../../../assets/images/carousel/item1.jpg'
 import item2 from '../../../../assets/images/carousel/item2.jpg'
 
@@ -36,7 +34,7 @@ export const Carousel = () => {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 2,
+    slidesToShow: 2.7,
     slidesToScroll: 1,
     nextArrow: <CarouselButtonNext />,
     prevArrow: <CarouselButtonPrev />,

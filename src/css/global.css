@@ -30,6 +30,95 @@ html, body {
     display: none;
 }
 
+.side{
+    width: 25%;
+    padding-left: 100px;
+    padding-top: 60px;
+    /* background-color: red; */
+    height: 100vh;
+    transition: all 300ms ease-in-out;
+    background-color: white;
+}
+
+/* Sidebar Store */
+
+.submenuStoreWrapper i{
+    position: absolute;
+    right: 130px;
+    color: var(--customGrey);
+    transition: all 300ms ease-in-out;
+}
+
+.submenuStore{
+    display: none;
+}
+
+.toggleStore:checked~.submenuStoreWrapper i{
+    transform: rotate(-180deg);
+    color: black;
+}
+
+.toggleStore:checked~.submenuStoreWrapper label{
+    color: black;
+}
+
+.toggleStore:checked~.submenuStore{
+    display: block;
+}
+
+/* Sidebar product */
+
+.submenuProductWrapper i{
+    position: absolute;
+    right: 130px;
+    color: var(--customGrey);
+    transition: all 300ms ease-in-out;
+}
+
+.submenuProduct{
+    display: none;
+}
+
+.toggleProduct:checked~.submenuProductWrapper i{
+    transform: rotate(-180deg);
+    color: black;
+}
+
+.toggleProduct:checked~.submenuProductWrapper label{
+    color: black;
+}
+
+.toggleProduct:checked~.submenuProduct{
+    display: block;
+}
+
+/* Sidebar product */
+
+.submenuOrderWrapper i{
+    position: absolute;
+    right: 130px;
+    color: var(--customGrey);
+    transition: all 300ms ease-in-out;
+}
+
+.submenuOrder{
+    display: none;
+}
+
+.toggleOrder:checked~.submenuOrderWrapper i{
+    transform: rotate(-180deg);
+    color: black;
+}
+
+.toggleOrder:checked~.submenuOrderWrapper label{
+    color: black;
+}
+
+.toggleOrder:checked~.submenuOrder{
+    display: block;
+}
+
+
 @font-face {
     font-family: 'metropolis';
     src: url('../assets/fonts/metropolis.regular-webfont.woff2') format('woff2'), url('../assets/fonts/metropolis.regular-webfont.woff') format('woff');

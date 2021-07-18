@@ -1,0 +1,22 @@
+.caroItem{
+    width: 238px;
+    height: 250px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* .caroItem img{
+    width: 200px;
+    height: 100%;
+    border-radius: 5px;
+} */
+
+.text{
+    display: inline-block;
+    color: white;
+    position: absolute;
+    font-weight: bolder;
+    font-size: 30px;
+}

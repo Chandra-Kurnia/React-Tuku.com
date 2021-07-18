@@ -1,0 +1,15 @@
+.contentWrapper{
+    width: 75%;
+    background-color: var(--bgWrapper);
+    transition: all 300ms ease-in-out;
+}
+
+
+.sidebarToggle:checked~.side{
+    margin-left: -380px;
+}
+
+.sidebarToggle:checked~.contentWrapper{
+    width: 100%;
+    background-color: red;
+}

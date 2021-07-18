@@ -7,7 +7,7 @@ export const MyAccount = () => {
     return (
         <div className={`${style.wrapper}`}>
             <NavbarLogin/>
-            <Sidebar/>
+            <Sidebar content="UserContent"/>
         </div>
     )
 }

@@ -42,3 +42,13 @@
     color: white;
     background-color: var(--primaryHover);
 }
+
+@media (max-width: 575.98px) { 
+    .auth-input-wrapper{
+        width: 300px;
+    }
+
+    .container-auth{
+        width: 370px;
+    }
+}

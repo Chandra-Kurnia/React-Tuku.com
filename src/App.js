@@ -13,6 +13,7 @@ import { ShowByCategory } from './pages/Products/ShowByCategory/ShowByCategory'
 import { ShowProduct } from './pages/Products/ShowProduct/ShowProduct';
 import { MyAccount } from './pages/Profile/MyAccount/MyAccount';
 import { NotFound } from './pages/Auth/NotFound/NotFound';
+import { StoreProfile } from './pages/Store/StoreProfile/StoreProfile';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route exact path="/MyBag" component={MyBag}/>
           <Route exact path="/product/:id" component={ShowProduct}/>
           <Route exact path="/profile" component={MyAccount}/>
+          <Route exact path="/store" component={StoreProfile}/>
           {/* <Route component={NotFound}/> */}
         </Route>
       </Switch>

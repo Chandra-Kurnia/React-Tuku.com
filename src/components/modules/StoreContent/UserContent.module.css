@@ -1,0 +1,30 @@
+.content{
+    background-color: white;
+    height: 550px;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.content span{
+    color: var(--customGrey);
+}
+
+.profile{
+    border-left: 1px solid var(--customGrey);
+    height: 200px;
+}
+
+.profile img{
+    width: 110px;
+    height: 110px;
+}
+
+.textarea{
+    width: 100%;
+    height: 170px;
+    border-radius: 5px;
+    border: 1px solid var(--customGrey);
+    resize: none;
+    margin-bottom: 20px;
+}
+
