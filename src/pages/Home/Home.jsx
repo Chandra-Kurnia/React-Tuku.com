@@ -43,28 +43,10 @@ export const Home = () => {
               store={item.store_name}
             />
           ))}
-          {/* <Card/>
-                <Card/>
-                <Card/>
-                <Card/>
-                <Card/>
-                <Card/>
-                <Card/>
-                <Card/>
-                <Card/> */}
         </div>
         {/* <h2 className="fw-bold">Popular</h2>
                 <span>You've never seen it before!</span>
                 <div className="cards d-flex flex-wrap">
-                <Card/>
-                <Card/>
-                <Card/>
-                <Card/>
-                <Card/>
-                <Card/>
-                <Card/>
-                <Card/>
-                <Card/>
                 <Card/>
                 </div> */}
       </section>

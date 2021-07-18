@@ -1,6 +1,5 @@
 .content{
     background-color: white;
-    height: 550px;
     border-radius: 5px;
     width: 100%;
 }
@@ -26,5 +25,20 @@
     border: 1px solid var(--customGrey);
     resize: none;
     margin-bottom: 20px;
+}
+
+.searchOrder{
+    width: 100%;
+}
+
+.searchOrder input{
+    height: 36px;
+    border-radius: 23px;
+    border-left: none;
+}
+
+.searchOrder span{
+    border-radius: 23px;
+    background-color: white;
 }
 

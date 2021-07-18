@@ -14,6 +14,8 @@ import { ShowProduct } from './pages/Products/ShowProduct/ShowProduct';
 import { MyAccount } from './pages/Profile/MyAccount/MyAccount';
 import { NotFound } from './pages/Auth/NotFound/NotFound';
 import { StoreProfile } from './pages/Store/StoreProfile/StoreProfile';
+import { MyProducts } from './pages/Store/StoreProducts/MyProducts/MyProducts';
+import { SellingProduct } from './pages/Store/StoreProducts/SellingProduct/SellingProduct';
 
 function App() {
   return (
@@ -30,6 +32,8 @@ function App() {
           <Route exact path="/product/:id" component={ShowProduct}/>
           <Route exact path="/profile" component={MyAccount}/>
           <Route exact path="/store" component={StoreProfile}/>
+          <Route exact path="/Product" component={MyProducts}/>
+          <Route exact path="/Sell" component={SellingProduct}/>
           {/* <Route component={NotFound}/> */}
         </Route>
       </Switch>

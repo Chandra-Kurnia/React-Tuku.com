@@ -1,6 +1,6 @@
 import React from "react";
 import { AuthInput } from "../../base/AuthInput/AuthInput";
-import style from "./UserContent.module.css";
+import style from "./storeContent.module.css";
 import { ButtonNavbarAuth } from "../../base/ButtonNavbarAuth/ButtonNavbarAuth";
 import avatar from "../../../assets/images/profiles/avatar/avatar.jpg"
 
