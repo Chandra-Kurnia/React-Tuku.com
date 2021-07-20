@@ -3,6 +3,7 @@ import { LoginLogos } from "../../../components/base/LoginLogos/LoginLogos";
 import { LoginSwitch } from "../../../components/base/LoginSwitch/LoginSwitch";
 import { AuthInput } from "../../../components/base/AuthInput/AuthInput";
 import { ButtonAuth } from "../../../components/base/ButtonAuth/ButtonAuth";
+import { Link } from "react-router-dom";
 
 export const Login = () => {
   const [Priv, setPriv] = useState([]);
@@ -22,7 +23,7 @@ export const Login = () => {
       </span>
       <ButtonAuth text="LOGIN"/>
       <span className="d-block mt-4 link-regist">
-        Dont have a Tuku Account ? <a href={"./signup"}>Register</a>
+        Dont have a Tuku Account ? <Link to={"./signup"}>Register</Link>
       </span>
     </div>
   );

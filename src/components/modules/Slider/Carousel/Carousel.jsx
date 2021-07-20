@@ -48,6 +48,17 @@ export const Carousel = () => {
         <ul style={{ margin: "0px", top: "-20px", padding: "0px", position: "absolute", left: 0 }}> {dots} </ul>
       </div>
     ),
+    responsive: [
+      {
+        breakpoint: 576,
+        settings:
+        {
+          slidesToShow: 1,
+          arrows: false,
+          centermode: true,
+        }
+      }
+    ]
   };
 
   return (

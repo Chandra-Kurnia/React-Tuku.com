@@ -1,7 +1,6 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { Navbar } from "../../../components/modules/Navbar/Navbar";
 import { useParams } from "react-router";
-import image from "../../../assets/images/products/img-p-1.jpg";
 import { ImageProductGallery } from "../../../components/base/imageProductGallery/ImageProductGallery";
 // eslint-disable-next-line no-unused-vars
 import style from "./ShowProduct.module.css";
@@ -13,6 +12,7 @@ import axios from "axios";
 export const ShowProduct = () => {
   const { id } = useParams();
   const [dataProduct, setData] = useState([]);
+  const [dataCategory, setDataCategory] = useState([]);
   const getData = () => {
     axios
       .get(`http://localhost:4000/product/show/${id}`)
@@ -23,13 +23,21 @@ export const ShowProduct = () => {
       .catch((err) => {
         console.log(err);
       });
+        getDataCategory();
   };
-
+  
   useEffect(() => {
     getData();
   }, []);
 
-  console.log(dataProduct);
+  
+    const getDataCategory = () => {
+        axios
+          .get(`http://localhost:4000/product/`)
+          .then((res) => {
+            setDataCategory(res.data.data);
+          });
+    };
 
   const [count, setCount] = useState(1);
 
@@ -94,15 +102,17 @@ export const ShowProduct = () => {
             <div className="row pt-5">
               <span className={`pb-3 ${style.color}`}>Color</span>
               <div className="d-flex">
-                <ColorPicker color="Black" type="radio" />
-                <ColorPicker color="Primary" type="radio" />
-                <ColorPicker color="darkBlue" type="radio" />
-                <ColorPicker color="lightGreen" type="radio" />
+                <ColorPicker color="Black" type="checkbox" value={() => {}} />
+                {/* <ColorPicker color="Primary" type="radio" value={() => {}} />
+                <ColorPicker color="darkBlue" type="radio" value={() => {}}/>
+                <ColorPicker color="lightGreen" type="radio" value={() => {}}/> */}
               </div>
             </div>
             <div className="row w-50 pt-3">
               <div className="col">
                 <span className={`${style.size} fw-bold`}>Size</span>
+                <br />
+                <span className="fs-3">{dataProduct.size}</span>
               </div>
               <div className="col">
                 <span className={`${style.quantity} fw-bold`}>Quantity</span>
@@ -113,7 +123,7 @@ export const ShowProduct = () => {
                 />
               </div>
             </div>
-            <div className="row pt-5">
+            <div className={`row pt-5 ${style.btnwrapp}`}>
               <div className="pt-5 d-flex justify-content-between">
                 <div className="col-3 pe-2">
                   <button className="btn btn-outline-secondary rounded-pill w-100">
@@ -150,16 +160,17 @@ export const ShowProduct = () => {
           <h2 className="fw-bold">You can also like this</h2>
           <span className="text-secondary">You’ve never seen it before!</span>
           <div className="cards d-flex flex-wrap">
-            {/* {data.map((item) => (
-              <Card
-                key={item.id_product}
-                id={item.id_product}
-                title={item.product_name}
-                src={item.image}
-                price={item.price}
-                store={item.store_name}
-              />
-            ))} */}
+            {dataCategory &&
+              dataCategory.map((item) => (
+                <Card
+                  key={item.id_product}
+                  id={item.id_product}
+                  title={item.product_name}
+                  src={item.image}
+                  price={item.price}
+                  store={item.store_name}
+                />
+              ))}
           </div>
         </section>
       </div>

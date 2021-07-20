@@ -4,6 +4,7 @@ import { LoginLogos } from "../../../components/base/LoginLogos/LoginLogos";
 import { LoginSwitch } from "../../../components/base/LoginSwitch/LoginSwitch";
 import { ButtonAuth } from "../../../components/base/ButtonAuth/ButtonAuth";
 import { AuthInput } from "../../../components/base/AuthInput/AuthInput";
+import { Link } from "react-router-dom";
 import { useState } from "react";
 
 export const SignUp = () => {
@@ -24,7 +25,7 @@ export const SignUp = () => {
         <AuthInput placeholder="Password" type="password" name="password" />
         <ButtonAuth text="LOGIN" />
         <span className="d-block mt-4 link-regist">
-          Already have a Tuku.com account ? <a href={"./login"}>Login</a>
+          Already have a Tuku.com account ? <Link to={"./login"}>Login</Link>
         </span>
       </div>
     );
@@ -39,7 +40,7 @@ export const SignUp = () => {
         <AuthInput placeholder="Password" type="password" name="password" />
         <ButtonAuth text="LOGIN" />
         <span className="d-block mt-4 link-regist">
-          Already have a Tuku.com account ? <a href={"./login"}>Login</a>
+          Already have a Tuku.com account ? <Link to={"./login"}>Login</Link>
         </span>
       </div>
     );

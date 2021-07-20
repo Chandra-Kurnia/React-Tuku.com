@@ -11,3 +11,9 @@ h3, .price, .color, .quantity, .size{
 .btnBuy:hover{
     background-color: var(--primaryHover);
 }
+
+@media (max-width: 575.98px) {
+    .btnwrapp{
+        width: 380px;
+    }
+}

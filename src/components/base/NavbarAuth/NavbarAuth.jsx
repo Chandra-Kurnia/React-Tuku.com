@@ -5,7 +5,7 @@ import { NavbarTrolly } from '../NavbarTrolly/NavbarTrolly'
 export const NavbarAuth = () => {
     return (
         <div className="d-flex align-items-center">
-            <NavbarTrolly href='/checkout'/>
+            <NavbarTrolly href='/MyBag'/>
             <ButtonNavbarAuth text="Login" css="login" href='/login'/>
             <ButtonNavbarAuth text="Sign Up" css="signup" href='/signup'/>
         </div>

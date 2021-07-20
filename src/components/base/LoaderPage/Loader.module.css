@@ -1,0 +1,23 @@
+.loaderWrapper{
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    position: fixed;
+    transition: all 100ms ease-in-out;
+}
+
+.loader{
+    background-color: white;
+    transition: all 100ms ease-in-out;
+}
+
+.loader img{
+    transition: all 100ms ease-in-out;
+}

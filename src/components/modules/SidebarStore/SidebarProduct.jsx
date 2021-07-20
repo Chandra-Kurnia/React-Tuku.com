@@ -6,6 +6,7 @@ import home from "../../../assets/icon/home.svg"
 import packageIcon from "../../../assets/icon/package.svg"
 import shoppingCart from "../../../assets/icon/shopping-cart.svg"
 import { StoreProduct } from "../StoreContent/StoreProduct";
+import { Link } from "react-router-dom";
 
 export const SidebarProduct = () => {
   return (
@@ -41,12 +42,12 @@ export const SidebarProduct = () => {
                 </div>
                 <ul className="submenuStore">
                   <li className="ms-4 ps-3">
-                    <a href="">Store Profile</a>
+                    <Link to="/store">Store Profile</Link>
                   </li>
                 </ul>
               </li>
               <li className="position-relative">
-                <input className="toggleProduct d-none" type="checkbox" name="" id="toggle-product" />
+                <input className="toggleProduct d-none" type="checkbox" name="" id="toggle-product" checked/>
                 <div className="d-flex align-items-center submenuProductWrapper">
                   <div className={`${style.circleWrapper} ${style.package} me-2 rounded-circle`}>
                     <img className={style.imgSide} src={packageIcon} alt="" />
@@ -56,10 +57,10 @@ export const SidebarProduct = () => {
                 </div>
                 <ul className="submenuProduct">
                   <li className="ms-4 ps-3">
-                    <a href="">My Product</a>
+                    <Link to="/Product">My Product</Link>
                   </li>
                   <li className="ms-4 ps-3">
-                    <a href="">Selling Product</a>
+                    <Link to="/Sell">Selling Product</Link>
                   </li>
                 </ul>
               </li>

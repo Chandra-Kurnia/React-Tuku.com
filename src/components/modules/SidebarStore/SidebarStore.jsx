@@ -6,6 +6,7 @@ import editProfile from "../../../assets/icon/edit-profile.svg";
 import home from "../../../assets/icon/home.svg"
 import packageIcon from "../../../assets/icon/package.svg"
 import shoppingCart from "../../../assets/icon/shopping-cart.svg"
+import { Link } from "react-router-dom";
 
 export const SidebarStore = () => {
   return (
@@ -31,7 +32,7 @@ export const SidebarStore = () => {
           <div className={`pt-5 ${style.act}`}>
             <ul>
               <li className="position-relative">
-                <input className="toggleStore d-none" type="checkbox" name="" id="toggle-store" />
+                <input className="toggleStore d-none" type="checkbox" name="" id="toggle-store" checked/>
                 <div className="d-flex align-items-center submenuStoreWrapper">
                   <div className={`${style.circleWrapper} ${style.home} me-2 rounded-circle`}>
                     <img className={style.imgSide} src={home} alt="" />
@@ -41,7 +42,7 @@ export const SidebarStore = () => {
                 </div>
                 <ul className="submenuStore">
                   <li className="ms-4 ps-3">
-                    <a href="">Store Profile</a>
+                    <Link to="">Store Profile</Link>
                   </li>
                 </ul>
               </li>
@@ -56,10 +57,10 @@ export const SidebarStore = () => {
                 </div>
                 <ul className="submenuProduct">
                   <li className="ms-4 ps-3">
-                    <a href="">My Product</a>
+                    <Link to="/Product">My Product</Link>
                   </li>
                   <li className="ms-4 ps-3">
-                    <a href="">Selling Product</a>
+                    <Link to="/Sell">Selling Product</Link>
                   </li>
                 </ul>
               </li>
@@ -74,10 +75,10 @@ export const SidebarStore = () => {
                 </div>
                 <ul className="submenuOrder">
                   <li className="ms-4 ps-3">
-                    <a href="">My Order</a>
+                    <Link to="">My Order</Link>
                   </li>
                   <li className="ms-4 ps-3">
-                    <a href="">Order Cancel</a>
+                    <Link to="">Order Cancel</Link>
                   </li>
                 </ul>
               </li>

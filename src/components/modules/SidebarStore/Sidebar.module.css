@@ -19,6 +19,7 @@
     width: 75%;
     background-color: var(--bgWrapper);
     transition: all 300ms ease-in-out;
+    overflow-y: auto;
 }
 
 .sidebarToggle:checked~.contentWrapper{

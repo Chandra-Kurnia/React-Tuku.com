@@ -4,12 +4,14 @@ import { Navbar } from "../../components/modules/Navbar/Navbar";
 import { Carousel } from "../../components/modules/Slider/Carousel/Carousel";
 import axios from "axios";
 import { SliderCategory } from "../../components/modules/Slider/SliderCategory/SliderCategory";
+require('dotenv').config();
 
-export const Home = () => {
+
+export const Home = (props) => {
   const [data, setData] = useState([]);
   const getAllData = () => {
     axios
-      .get("http://localhost:4000/product/")
+      .get(process.env.REACT_APP_SERVER_URL)
       .then((response) => {
         // setData(response.data)
         setData(response.data.data);
@@ -24,7 +26,7 @@ export const Home = () => {
   }, []);
   return (
     <div>
-      <Navbar />
+      <Navbar history={props.history}/>
       <Carousel />
       <section className="container mt-5">
         <h2 className="fw-bold">Category</h2>

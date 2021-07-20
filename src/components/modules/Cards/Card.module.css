@@ -30,4 +30,7 @@
         width: 100%;
         margin-bottom: 20px;
     }
+    .cardWrapper img{
+        height: 280px;
+    }
 }
