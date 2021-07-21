@@ -28,7 +28,7 @@
 }
 
 .searchOrder{
-    width: 100%;
+    width: 25%;
 }
 
 .searchOrder input{
@@ -40,5 +40,27 @@
 .searchOrder span{
     border-radius: 23px;
     background-color: white;
+}
+
+.tableControl{
+    width: 25%;
+}
+
+.TableContent{
+    width: 100%;
+}
+
+@media (max-width: 575.98px) { 
+    .searchOrder{
+        width: 100%;
+    }
+
+    .InputTableControl{
+        width: 300px;
+    }
+
+    .TableContent{
+        font-size: 10px;
+    }
 }
 

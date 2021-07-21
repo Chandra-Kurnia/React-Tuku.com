@@ -114,7 +114,7 @@ export const StoreProduct = () => {
           <label for="table-order-archived">Archived</label>
         </div>
       </div>
-      <div className={`mt-4 w-25 ${style.searchOrder}`}>
+      <div className={`mt-4 ${style.searchOrder}`}>
         <div className="input-group flex-nowrap">
           <span class="input-group-text" id="addon-wrapping">
             <i class="fa fa-search"></i>
@@ -129,12 +129,12 @@ export const StoreProduct = () => {
         </div>
       </div>
       <div className="table-order-product mt-5">
-        <div className="d-flex">
+        <div className="d-flex flex-column flex-lg-row">
           {/* Order */}
-          <div className="w-25 ms-2 mt-2 mb-2">
+          <div className={`${style.tableControl} ms-2 mt-2 mb-2`}>
             <span>Order : </span>
             <select
-              class="form-select"
+              className={`${style.InputTableControl} form-select`}
               aria-label="Default select example"
               onChange={(e) => handleOrder(e)}
             >
@@ -145,10 +145,10 @@ export const StoreProduct = () => {
             </select>
           </div>
           {/* Amount of data */}
-          <div className="w-25 ms-2 mt-2 mb-2">
+          <div className={`${style.tableControl} ms-2 mt-2 mb-2`}>
             <span>Amount of data : </span>
             <select
-              class="form-select"
+              className={`${style.InputTableControl} form-select`}
               aria-label="Default select example"
               onChange={(e) => setlimit(e.target.value)}
             >
@@ -158,10 +158,10 @@ export const StoreProduct = () => {
             </select>
           </div>
           {/* Page */}
-          <div className="w-25 ms-2 mt-2 mb-2">
+          <div className={`${style.tableControl} ms-2 mt-2 mb-2`}>
             <span>Page 1 of {totalPage} page</span>
             <select
-              class="form-select"
+              className={`${style.InputTableControl} form-select`}
               aria-label="Default select example"
               onChange={(e) => setPage(e.target.value)}
             >
@@ -171,8 +171,7 @@ export const StoreProduct = () => {
             </select>
           </div>
         </div>
-        {/* <Pagination total="1"/>, */}
-        <table style={{ width: "100%" }}>
+        <table className={style.TableContent}>
           <thead>
             <tr>
               <th style={{ width: "40%", position: "relative" }}>

@@ -82,7 +82,7 @@ export const StoreSell = () => {
       <div className={`container mt-3 pt-3 pb-5 ${style.content}`}>
         <h2>Items Detail</h2>
         <hr />
-        <span>Unit Price</span>
+        <span>Unit Price (Rp. )</span>
         <div className="w-50">
           <Input name="price" value={(e) => setprice(e.target.value)} />
         </div>

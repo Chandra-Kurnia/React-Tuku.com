@@ -28,11 +28,11 @@ export const TableItem = (props) => {
     <Fragment>
       <tr style={{height: "60px"}}>
         <td>{props.title}</td>
-        <td>$ {props.price}</td>
+        <td>Rp. {props.price}</td>
         <td>{props.quantity}</td>
         <td>
           <button
-            className="btn btn-danger me-2"
+            className="btn btn-danger me-2 mb-lg-0 mb-1"
             value={idProduct}
             onClick={() => confirmDelete()}
             style={{width: "80px"}}

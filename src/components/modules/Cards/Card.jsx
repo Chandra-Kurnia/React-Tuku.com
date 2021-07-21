@@ -8,7 +8,7 @@ export const Card = (props) => {
                 <img src={props.src} className="card-img-top" alt="..."></img>
                     <div className="card-body">
                         <Link to={`/product/${props.id}`}>{props.title}</Link><br />
-                        <span className={style.price}>${props.price}</span><br />
+                        <span className={style.price}>Rp. {props.price}</span><br />
                         <span className={style.shop}>{props.store}</span><br />
                         <span className={`fa fa-star starChecked`}></span>
                         <span className={`fa fa-star starChecked`}></span>

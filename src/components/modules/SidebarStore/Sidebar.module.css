@@ -74,3 +74,13 @@
 ul li label{
     color: var(--customGrey);
 }
+
+@media (max-width: 575.98px) {
+    .side{
+        display: none;
+    }
+    
+    .contentWrapper{
+        width: 100%;
+    }
+}
