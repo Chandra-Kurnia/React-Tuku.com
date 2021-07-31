@@ -10,7 +10,7 @@ export const StoreProduct = () => {
   const [Loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
   const [keyword, setKeyword] = useState("");
-  const [order, setOrder] = useState("");
+  const [order, setOrder] = useState("ASC");
   const [limit, setlimit] = useState(5);
   const [orderBy, setorderBy] = useState("id_product");
   const [page, setPage] = useState("");
@@ -66,8 +66,9 @@ export const StoreProduct = () => {
   };
 
   const handleDelete = (e) => {
+    
     const id_product = e;
-    swal("Berhasil", "Product sukses ditambahkan", "success").then((value) => {
+    swal("Berhasil", "Product sukses dihapus", "success").then((value) => {
       if (value | (value == false)) {
         setLoading(true);
         axios.delete(`http://localhost:4000/product/${id_product}`);
@@ -114,6 +115,7 @@ export const StoreProduct = () => {
           <label for="table-order-archived">Archived</label>
         </div>
       </div>
+      {/* Search */}
       <div className={`mt-4 ${style.searchOrder}`}>
         <div className="input-group flex-nowrap">
           <span class="input-group-text" id="addon-wrapping">
@@ -129,6 +131,7 @@ export const StoreProduct = () => {
         </div>
       </div>
       <div className="table-order-product mt-5">
+      {/* Table control */}
         <div className="d-flex flex-column flex-lg-row">
           {/* Order */}
           <div className={`${style.tableControl} ms-2 mt-2 mb-2`}>
@@ -171,6 +174,7 @@ export const StoreProduct = () => {
             </select>
           </div>
         </div>
+        {/* Table */}
         <table className={style.TableContent}>
           <thead>
             <tr>
@@ -223,7 +227,7 @@ export const StoreProduct = () => {
             </tr>
           </thead>
           <tbody>
-            {data &&
+            {data ?
               data.map((item) => (
                 <TableItem
                   key={item.id_product}
@@ -233,7 +237,7 @@ export const StoreProduct = () => {
                   idProduct={item.id_product}
                   click={(e) => handleDelete(e)}
                 />
-              ))}
+              )) : "DATA NOT FOUND"}
           </tbody>
         </table>
       </div>

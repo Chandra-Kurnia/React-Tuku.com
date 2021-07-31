@@ -5,10 +5,6 @@ import swal from "sweetalert";
 export const TableItem = (props) => {
   const idProduct = props.idProduct;
   function confirmDelete() {
-    // const confirmdel = window.confirm("apakah anda yakin ingin menghapus data ini ? ?");
-    // if(confirmdel){
-    //     props.click(idProduct)
-    // }
     swal({
       title: "Apakah anda yakin?",
       text: "Data ini akan dihapus dari store anda !",

@@ -96,7 +96,7 @@ export const ShowProduct = () => {
             <div className="row">
               <span className="fw-bold gray">Price</span>
               <span className={`fs-2 ${style.price}`}>
-                $ {dataProduct.price}
+                Rp. {dataProduct.price}
               </span>
             </div>
             <div className="row pt-5">
