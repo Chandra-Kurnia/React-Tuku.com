@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useRef } from "react";
 import style from "./storeContent.module.css";
 import { Input } from "../../base/Input/Input";
 import { ColorPicker } from "../../base/ColorPicker/ColorPicker";
@@ -6,8 +6,11 @@ import axios from "axios";
 import { useHistory } from "react-router";
 import swal from "sweetalert";
 import { LoaderPage } from "../../base/LoaderPage/LoaderPage";
+import { Editor } from "@tinymce/tinymce-react";
 
 export const StoreSell = () => {
+  const editorRef = useRef(null);
+
   const [Loading, setLoading] = useState(false);
   const move = useHistory();
   const [title, setTitle] = useState("");
@@ -49,21 +52,23 @@ export const StoreSell = () => {
 
       console.log(dataProduct);
       axios
-        .post("http://localhost:4000/product/", dataProduct)
+        .post("http://localhost:4000/v1/product/", dataProduct)
         .then(() => {
-          swal("Berhasil", "Product sukses ditambahkan", "success")
-          .then((value) => {
-            if(value | value === false){
-              setLoading(true);
-              setTimeout(() => {
-                move.push("/product");
-                setLoading(false);
-              }, 200);
+          swal("Berhasil", "Product sukses ditambahkan", "success").then(
+            (value) => {
+              if (value | (value === false)) {
+                setLoading(true);
+                setTimeout(() => {
+                  move.push("/product");
+                  setLoading(false);
+                }, 200);
+              }
             }
-          })
+          );
         })
-        .catch(() => {
+        .catch((err) => {
           alert("Failed");
+          console.log(err);
         });
     }
   };
@@ -211,20 +216,40 @@ export const StoreSell = () => {
         <h2>Description</h2>
         <hr />
         <div className="container">
-          <textarea
+          {/* <textarea
             name=""
             id="product-desc"
             cols="115"
             rows="10"
             onChange={(e) => setdesc(e.target.value)}
-          ></textarea>
+          ></textarea> */}
+          <Editor
+            textareaName="description"
+            onEditorChange={e => setdesc(e)}
+            onInit={(evt, editor) => (editorRef.current = editor)}
+            init={{
+              height: 500,
+              menubar: false,
+              plugins: [
+                "advlist autolink lists link image charmap print preview anchor",
+                "searchreplace visualblocks code fullscreen",
+                "insertdatetime media table paste code help wordcount",
+              ],
+              toolbar:
+                "undo redo | " +
+                "bold italic backcolor | " +
+                "bullist numlist | ",
+              content_style:
+                "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
+            }}
+          />
         </div>
       </div>
       <div className="container d-flex flex-row-reverse mb-5">
         <button
           className="btn rounded-pill mt-2"
           style={{
-            backgroundColor: 'var(--primary)',
+            backgroundColor: "var(--primary)",
             width: "100px",
             color: "white",
           }}

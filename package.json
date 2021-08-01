@@ -6,6 +6,7 @@
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
+    "@tinymce/tinymce-react": "^3.12.6",
     "axios": "^0.21.1",
     "dotenv": "^10.0.0",
     "query-string": "^7.0.1",

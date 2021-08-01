@@ -17,6 +17,7 @@ export const login = (data, history) => async (dispatch) => {
     localStorage.setItem("token", payload.data.token);
     history.push("/");
   } catch (error) {
+    console.log("error : " + error);
     swal("Error!", "Wrong email or password", "error");
   }
 };
@@ -40,5 +41,13 @@ export const register = (data, history) => async (dispatch) => {
     }
   } catch (error) {
     swal("Error!", "Failed register", "error");
+  }
+};
+
+export const activate = (role, token) => async (dispatch) => {
+  try{
+    axios.get(`http://localhost:4000/v1/${role}/activation/${token}`)
+  }catch(err){
+
   }
 };

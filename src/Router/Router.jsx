@@ -15,6 +15,7 @@ import { SellingProduct } from "../pages/Store/StoreProducts/SellingProduct/Sell
 import { UpdateProduct } from "../pages/Store/StoreProducts/UpdateProduct/UpdateProduct";
 import { SearchProduct } from "../pages/Products/SearchProduct/SearchProduct";
 import { Activation } from "../pages/Auth/Activation/Activation";
+import { ActivationSucess } from "../pages/Auth/ActivationSuccess/ActivationSuccess";
 
 export class router extends Component {
   render() {
@@ -25,6 +26,7 @@ export class router extends Component {
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={SignUp} />
             <Route exact path="/activateAccount" component={Activation}/>
+            <Route exact path="/activationSuccess" component={ActivationSucess}/>
             <Route exact path="/forgotPassword" component={ForgotPassword} />
             <Route exact path="/ConfirmPassword" component={ConfirmPassword} />
             <Route exact path="/" component={Home} />
