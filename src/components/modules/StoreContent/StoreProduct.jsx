@@ -25,7 +25,7 @@ export const StoreProduct = () => {
     setorderBy(ord);
   };
 
-  let link = `http://localhost:4000/product/?order=${order}&orderBy=${orderBy}&page=${page}`;
+  let link = `http://localhost:4000/v1/product/?order=${order}&orderBy=${orderBy}&page=${page}`;
 
   if (limit != "") {
     link += `&limit=${limit}`;
@@ -66,12 +66,11 @@ export const StoreProduct = () => {
   };
 
   const handleDelete = (e) => {
-    
     const id_product = e;
     swal("Berhasil", "Product sukses dihapus", "success").then((value) => {
       if (value | (value == false)) {
         setLoading(true);
-        axios.delete(`http://localhost:4000/product/${id_product}`);
+        axios.delete(`http://localhost:4000/v1/product/${id_product}`);
         setTimeout(() => {
           getAllData();
           setLoading(false);

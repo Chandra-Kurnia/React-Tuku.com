@@ -4,28 +4,18 @@ import { useParams } from "react-router";
 // eslint-disable-next-line no-unused-vars
 import style from "./ShowByCategory.module.css";
 import { Card } from "../../../components/modules/Cards/Card";
-import axios from "axios";
+import { showProductByCategory } from "../../../config/redux/actions/productAction";
+import { useDispatch, useSelector } from "react-redux";
 
 export const ShowByCategory = () => {
+  const dispatch = useDispatch()
   const { category } = useParams();
-  const [data, setData] = useState([]);
-  const getAllData = () => {
-    axios
-      .get(`http://localhost:4000/product/category/${category}`)
-      .then((response) => {
-        // setData(response.data)
-        setData(response.data.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
 
   useEffect(() => {
-    getAllData();
+    dispatch(showProductByCategory(category))
   }, []);
 
-  console.log(data);
+  const { products } = useSelector((state) => state.product);
 
   return (
     <Fragment>
@@ -36,16 +26,16 @@ export const ShowByCategory = () => {
         </span>
         <h1 className="fw-bold">{category}</h1>
         <div className="cards d-flex flex-wrap">
-        {data ? data.map((item) => (
+        {products ? products.map((product) => (
             <Card
-              key={item.id_product}
-              id={item.id_product}
-              title={item.product_name}
-              src={item.image}
-              price={item.price}
-              store={item.store_name}
+              key={product.id_product}
+              id={product.id_product}
+              title={product.product_name}
+              src={product.image}
+              price={product.price}
+              store={product.store_name}
             />
-          )) : "Data Not Found"}
+          )) : "products Not Found"}
         </div>
       </div>
     </Fragment>

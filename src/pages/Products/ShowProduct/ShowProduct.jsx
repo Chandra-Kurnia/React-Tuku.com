@@ -6,46 +6,29 @@ import { ImageProductGallery } from "../../../components/base/imageProductGaller
 import style from "./ShowProduct.module.css";
 import { ColorPicker } from "../../../components/base/ColorPicker/ColorPicker";
 import { ButtonCount } from "../../../components/base/ButtonCount/ButtonCount";
-import { Card, Cards } from "../../../components/modules/Cards/Card";
-import axios from "axios";
+import { Card } from "../../../components/modules/Cards/Card";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  showProduct,
+  showProductByCategory,
+} from "../../../config/redux/actions/productAction";
 
 export const ShowProduct = () => {
+  const dispatch = useDispatch();
   const { id } = useParams();
-  const [dataProduct, setData] = useState([]);
-  const [dataCategory, setDataCategory] = useState([]);
-  const getData = () => {
-    axios
-      .get(`http://localhost:4000/product/show/${id}`)
-      .then((response) => {
-        // setData(response.data)
-        setData(response.data.data[0]);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-        getDataCategory();
-  };
-  
+  const [count, setCount] = useState(1);
+  const { products, product } = useSelector((state) => state.product);
+
   useEffect(() => {
-    getData();
+    dispatch(showProduct(id));
+    dispatch(showProductByCategory(product.category));
   }, []);
 
-  
-    const getDataCategory = () => {
-        axios
-          .get(`http://localhost:4000/product/`)
-          .then((res) => {
-            setDataCategory(res.data.data);
-          });
-    };
-
-  const [count, setCount] = useState(1);
-
   const handlePlusCount = () => {
-    if (count < dataProduct.quantity) {
+    if (count < product.quantity) {
       setCount(count + 1);
     } else {
-      setCount(dataProduct.quantity);
+      setCount(product.quantity);
     }
   };
   const handleMinusCount = () => {
@@ -60,28 +43,41 @@ export const ShowProduct = () => {
       <Navbar />
       <div className="container">
         <span className="d-inline-block mt-5 mb-5">
-          <a href="/">Home</a> &#62; Category &#62;{" "}
-          <b>{dataProduct.category}</b>
+          <a href="/">Home</a> &#62; Category &#62; <b>{product.category}</b>
         </span>
         <div className="row">
           <div className="col-lg-4">
             <div className={`row image-product-main`}>
-              <img src={dataProduct.image} className="rounded" alt="" />
+              <img
+                src={`http://localhost:4000/file/${product.image}`}
+                className="rounded"
+                alt=""
+              />
             </div>
             <div className={`row image-product-small`}>
               <div className={`gallery d-flex justify-content-between`}>
-                <ImageProductGallery srcImage={dataProduct.image} />
-                <ImageProductGallery srcImage={dataProduct.image} />
-                <ImageProductGallery srcImage={dataProduct.image} />
-                <ImageProductGallery srcImage={dataProduct.image} />
-                <ImageProductGallery srcImage={dataProduct.image} />
+                <ImageProductGallery
+                  srcImage={`http://localhost:4000/file/${product.image}`}
+                />
+                <ImageProductGallery
+                  srcImage={`http://localhost:4000/file/${product.image}`}
+                />
+                <ImageProductGallery
+                  srcImage={`http://localhost:4000/file/${product.image}`}
+                />
+                <ImageProductGallery
+                  srcImage={`http://localhost:4000/file/${product.image}`}
+                />
+                <ImageProductGallery
+                  srcImage={`http://localhost:4000/file/${product.image}`}
+                />
               </div>
             </div>
           </div>
           <div className="col-8">
             <div className="row">
               <span>
-                <h3>{dataProduct.product_name}</h3>
+                <h3>{product.product_name}</h3>
               </span>
               <span className={`fw-bold gray`}>Shop</span>
               <div className="d-flex">
@@ -95,9 +91,7 @@ export const ShowProduct = () => {
             </div>
             <div className="row">
               <span className="fw-bold gray">Price</span>
-              <span className={`fs-2 ${style.price}`}>
-                Rp. {dataProduct.price}
-              </span>
+              <span className={`fs-2 ${style.price}`}>Rp. {product.price}</span>
             </div>
             <div className="row pt-5">
               <span className={`pb-3 ${style.color}`}>Color</span>
@@ -112,7 +106,7 @@ export const ShowProduct = () => {
               <div className="col">
                 <span className={`${style.size} fw-bold`}>Size</span>
                 <br />
-                <span className="fs-3">{dataProduct.size}</span>
+                <span className="fs-3">{product.size}</span>
               </div>
               <div className="col">
                 <span className={`${style.quantity} fw-bold`}>Quantity</span>
@@ -151,17 +145,17 @@ export const ShowProduct = () => {
           <span className="mt-3 fw-bold fs-5">Condition</span>
           <br />
           <span style={{ color: "red" }} className="d-block mb-5">
-            {dataProduct.status}
+            {product.status}
           </span>
           <span className="fw-bold fs-5">Description</span>
-          <p>{dataProduct.description}</p>
+          <p>{product.description}</p>
           <span className="mt-3 fw-bold fs-5">Product Review</span>
           <hr />
           <h2 className="fw-bold">You can also like this</h2>
           <span className="text-secondary">You’ve never seen it before!</span>
           <div className="cards d-flex flex-wrap">
-            {dataCategory &&
-              dataCategory.map((item) => (
+            {products &&
+              products.map((item) => (
                 <Card
                   key={item.id_product}
                   id={item.id_product}
