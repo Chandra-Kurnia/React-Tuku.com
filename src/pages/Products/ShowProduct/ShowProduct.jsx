@@ -22,7 +22,8 @@ export const ShowProduct = () => {
   useEffect(() => {
     dispatch(showProduct(id));
     dispatch(showProductByCategory(product.category));
-  });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handlePlusCount = () => {
     if (count < product.quantity) {

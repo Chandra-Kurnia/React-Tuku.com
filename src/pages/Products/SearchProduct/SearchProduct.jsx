@@ -25,6 +25,7 @@ export const SearchProduct = () => {
 
   useEffect(() => {
     getAllData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [keyword]);
 
   console.log(data);

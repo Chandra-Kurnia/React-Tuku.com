@@ -11,7 +11,8 @@ export const Home = (props) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getProduct());
-  });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   const { products } = useSelector((state) => state.product);
   return (
     <div>

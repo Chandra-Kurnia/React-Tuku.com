@@ -13,7 +13,8 @@ export const ShowByCategory = () => {
 
   useEffect(() => {
     dispatch(showProductByCategory(category))
-  });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const { products } = useSelector((state) => state.product);
 

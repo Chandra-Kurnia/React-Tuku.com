@@ -36,8 +36,8 @@ export const StoreProduct = () => {
   }
 
   totalPage = Math.floor(totalData / limit);
-  if(totalData%limit > 0){
-    totalPage +=1;
+  if (totalData % limit > 0) {
+    totalPage += 1;
   }
 
   const iteration = [];
@@ -47,6 +47,7 @@ export const StoreProduct = () => {
 
   useEffect(() => {
     getAllData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [keyword, order, orderBy, limit, page]);
 
   const getAllData = () => {
@@ -61,7 +62,7 @@ export const StoreProduct = () => {
       });
 
     axios.get("http://localhost:4000/product").then((response) => {
-      setTotalData(response.data.amount)
+      setTotalData(response.data.amount);
     });
   };
 
@@ -130,7 +131,7 @@ export const StoreProduct = () => {
         </div>
       </div>
       <div className="table-order-product mt-5">
-      {/* Table control */}
+        {/* Table control */}
         <div className="d-flex flex-column flex-lg-row">
           {/* Order */}
           <div className={`${style.tableControl} ms-2 mt-2 mb-2`}>
@@ -226,17 +227,18 @@ export const StoreProduct = () => {
             </tr>
           </thead>
           <tbody>
-            {data ?
-              data.map((item) => (
-                <TableItem
-                  key={item.id_product}
-                  title={item.product_name}
-                  price={item.price}
-                  quantity={item.quantity}
-                  idProduct={item.id_product}
-                  click={(e) => handleDelete(e)}
-                />
-              )) : "DATA NOT FOUND"}
+            {data
+              ? data.map((item) => (
+                  <TableItem
+                    key={item.id_product}
+                    title={item.product_name}
+                    price={item.price}
+                    quantity={item.quantity}
+                    idProduct={item.id_product}
+                    click={(e) => handleDelete(e)}
+                  />
+                ))
+              : "DATA NOT FOUND"}
           </tbody>
         </table>
       </div>

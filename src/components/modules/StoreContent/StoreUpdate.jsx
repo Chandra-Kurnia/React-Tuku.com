@@ -46,7 +46,8 @@ export const StoreUpdate = (props) => {
 
   useEffect(() => {
     getData();
-  });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const [title, setTitle] = useState("");
   const [price, setprice] = useState("");
