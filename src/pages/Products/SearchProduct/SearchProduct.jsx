@@ -1,6 +1,5 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { NavbarLogin } from "../../../components/modules/NavbarLogin/NavbarLogin";
-import { useParams } from "react-router";
 // eslint-disable-next-line no-unused-vars
 import style from "./ShowByCategory.module.css";
 import { Card } from "../../../components/modules/Cards/Card";
@@ -17,7 +16,6 @@ export const SearchProduct = () => {
     axios
       .get(`http://localhost:4000/product?keyword=${keyword}`)
       .then((response) => {
-        // setData(response.data)
         setData(response.data.data);
       })
       .catch((err) => {

@@ -8,7 +8,6 @@ export const BoxItem = () => {
   const [count, setCount] = useState(1);
   let [price, setPrice] = useState(20);
   const defaultPrice = 20;
-  let totalPrice = 0;
   const handlePlusCount = () =>{
       setCount(count + 1)
       setPrice(price += defaultPrice)

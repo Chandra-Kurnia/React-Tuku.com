@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useEffect } from "react";
 import { NavbarLogin } from "../../../components/modules/NavbarLogin/NavbarLogin";
 import { useParams } from "react-router";
 // eslint-disable-next-line no-unused-vars
@@ -13,7 +13,7 @@ export const ShowByCategory = () => {
 
   useEffect(() => {
     dispatch(showProductByCategory(category))
-  }, []);
+  });
 
   const { products } = useSelector((state) => state.product);
 

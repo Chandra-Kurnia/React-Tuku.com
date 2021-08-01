@@ -1,15 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import "../../../css/auth.css";
 import { LoginLogos } from "../../../components/base/LoginLogos/LoginLogos";
 import { LoginSwitch } from "../../../components/base/LoginSwitch/LoginSwitch";
 import { ButtonAuth } from "../../../components/base/ButtonAuth/ButtonAuth";
 import { AuthInput } from "../../../components/base/AuthInput/AuthInput";
 import { Link } from "react-router-dom";
-import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { register } from "../../../config/redux/actions/userAction";
+import { useHistory } from "react-router";
 
 export const SignUp = () => {
+  const history = useHistory()
   const dispatch = useDispatch();
   const [form, setForm] = useState({
     owner: '',
@@ -27,7 +28,6 @@ export const SignUp = () => {
       [e.target.name]: e.target.value
     })
   }
-  console.log(form)
 
   const [radioValue, setradioValue] = useState([]);
   const changeValueRadio = (e) => {
@@ -39,8 +39,7 @@ export const SignUp = () => {
   };
 
   const handleSignUp = () => {
-    // alert(`owner ${form.owner}, name ${form.name}, email ${form.email}, Phone ${form.phoneNumber}, storename ${form.storeName}, pass ${form.pass}`)
-    dispatch(register(form))
+    dispatch(register(form, history))
   }
 
   if (radioValue === "seller") {

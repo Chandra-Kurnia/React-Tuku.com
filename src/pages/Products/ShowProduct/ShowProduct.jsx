@@ -22,7 +22,7 @@ export const ShowProduct = () => {
   useEffect(() => {
     dispatch(showProduct(id));
     dispatch(showProductByCategory(product.category));
-  }, []);
+  });
 
   const handlePlusCount = () => {
     if (count < product.quantity) {

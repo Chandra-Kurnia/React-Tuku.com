@@ -46,7 +46,7 @@ export const StoreUpdate = (props) => {
 
   useEffect(() => {
     getData();
-  }, []);
+  });
 
   const [title, setTitle] = useState("");
   const [price, setprice] = useState("");
@@ -76,7 +76,7 @@ export const StoreUpdate = (props) => {
       .put(`http://localhost:4000/product/${idProduct}`, dataProduct)
       .then(() => {
         swal("Berhasil", "Data berhasil di update", "success").then((value) => {
-          if (value | (value == false)) {
+          if (value | (value === false)) {
             setLoading(true);
             setTimeout(() => {
               move.push("/product");

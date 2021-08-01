@@ -75,10 +75,10 @@ export const SidebarProduct = () => {
                 </div>
                 <ul className="submenuOrder">
                   <li className="ms-4 ps-3">
-                    <a href="">My Order</a>
+                    <Link to="">My Order</Link>
                   </li>
                   <li className="ms-4 ps-3">
-                    <a href="">Order Cancel</a>
+                    <Link to="">Order Cancel</Link>
                   </li>
                 </ul>
               </li>

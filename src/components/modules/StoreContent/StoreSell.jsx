@@ -53,7 +53,7 @@ export const StoreSell = () => {
         .then(() => {
           swal("Berhasil", "Product sukses ditambahkan", "success")
           .then((value) => {
-            if(value | value == false){
+            if(value | value === false){
               setLoading(true);
               setTimeout(() => {
                 move.push("/product");

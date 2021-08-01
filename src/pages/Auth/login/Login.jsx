@@ -5,8 +5,10 @@ import { ButtonAuth } from "../../../components/base/ButtonAuth/ButtonAuth";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import {login} from "../../../config/redux/actions/userAction";
+import { useHistory } from "react-router";
 
 export const Login = () => {
+  const history = useHistory()
   const dispatch = useDispatch()
   const [form, setForm] = useState({
     email: "",
@@ -22,7 +24,7 @@ export const Login = () => {
   };
 
   const handleLogin = async () => {
-    dispatch(login(form))
+    dispatch(login(form, history))
   }
 
   return (

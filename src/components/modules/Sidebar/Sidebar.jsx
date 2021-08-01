@@ -6,6 +6,7 @@ import editProfile from "../../../assets/icon/edit-profile.svg"
 import user from "../../../assets/icon/user.png"
 import loc from "../../../assets/icon/loc.png"
 import clipboard from "../../../assets/icon/clipboard.png"
+import { Link } from "react-router-dom";
 
 export const Sidebar = () => {
   return (
@@ -31,28 +32,28 @@ export const Sidebar = () => {
           <div className={`pt-5 ${style.act}`}>
             <ul>
               <li>
-                <a href="" className="d-flex">
+                <Link to="" className="d-flex">
                   <div className={`rounded-circle me-3 ${style.circleWrapper} ${style.circleProfile}`}>
                     <img className={style.imgSide} src={user} alt="" />
                   </div>
                   <div className={`d-flex align-items-center sidebarActive`}>My Account</div>
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="" className="d-flex">
+                <Link to="" className="d-flex">
                   <div className={`rounded-circle me-3 ${style.circleWrapper} ${style.loc}`}>
                     <img className={style.imgSide} src={loc} alt="" />
                   </div>
                   <div className="d-flex align-items-center">Shipping Address</div>
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="" className="d-flex">
+                <Link to="" className="d-flex">
                   <div className={`rounded-circle me-3 ${style.circleWrapper} ${style.clip}`}>
                     <img className={style.imgSide} src={clipboard} alt="" />
                   </div>
                   <div className="d-flex align-items-center">My Orders</div>
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

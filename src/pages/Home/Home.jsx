@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Card } from "../../components/modules/Cards/Card";
 import { Navbar } from "../../components/modules/Navbar/Navbar";
@@ -11,7 +11,7 @@ export const Home = (props) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getProduct());
-  }, []);
+  });
   const { products } = useSelector((state) => state.product);
   return (
     <div>

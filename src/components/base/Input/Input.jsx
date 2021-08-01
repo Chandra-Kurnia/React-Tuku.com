@@ -1,5 +1,4 @@
 import React from "react";
-import style from "./authInput.module.css";
 
 export const Input = (props) => {
   return (

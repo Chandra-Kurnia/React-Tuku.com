@@ -1,10 +1,6 @@
 import React from "react";
 import { NavbarLogos } from "../../base/NavbarLogos/NavbarLogos";
-import { NavbarSearch } from "../../base/NavbarSearch/NavbarSearch";
-import { Filter } from "../Filter/Filter";
-// eslint-disable-next-line no-unused-vars
 import style from "./NavbarStore.module.css";
-import { NavbarTrolly } from "../../base/NavbarTrolly/NavbarTrolly";
 import avatar from "../../../assets/images/profiles/avatar/avatar.jpg";
 
 export const NavbarStore = () => {
