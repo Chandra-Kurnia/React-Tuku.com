@@ -2,9 +2,9 @@ import axios from "axios";
 
 export const getProduct = () => async (dispatch) => {
   await axios
-    .get(`http://localhost:4000/v1/product`)
+    .get(`${process.env.REACT_APP_SERVER_URL}/product`)
     .then((res) => {
-      // console.log(process.env.REACT_APP_SERVER_URL);
+      console.log();
       dispatch({ type: "getAllProduct", payload: res.data.data });
     })
     .catch((err) => {
@@ -14,7 +14,7 @@ export const getProduct = () => async (dispatch) => {
 
 export const showProductByCategory = (category) => async (dispatch) => {
   await axios
-    .get(`http://localhost:4000/v1/product/category/${category}`)
+    .get(`${process.env.REACT_APP_SERVER_URL}/product/category/${category}`)
     .then((res) => {
       dispatch({ type: "showProductByCategory", payload: res.data.data });
     })
@@ -24,11 +24,23 @@ export const showProductByCategory = (category) => async (dispatch) => {
 };
 
 export const showProduct = (id) => async (dispatch) => {
-  await axios.get(`http://localhost:4000/v1/product/show/${id}`)
-  .then(res => {
-    dispatch({type: 'showProduct', payload: res.data.data[0]})
-  })
-  .catch(err => {
-    console.log(err);
-  })
-}
+  await axios
+    .get(`${process.env.REACT_APP_SERVER_URL}/product/show/${id}`)
+    .then((res) => {
+      dispatch({ type: "showProduct", payload: res.data.data[0] });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+export const searchProduct = (keyword) => async (dispatch) => {
+  await axios
+    .get(`http://localhost:4000/v1/product?keyword=${keyword}`)
+    .then((res) => {
+      dispatch({ type: "searchProduct", payload: res.data.data });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};

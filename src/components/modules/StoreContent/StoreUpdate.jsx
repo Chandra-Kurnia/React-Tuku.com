@@ -13,7 +13,7 @@ export const StoreUpdate = (props) => {
   const { idProduct } = props;
   const getData = () => {
     axios
-      .get(`http://localhost:4000/product/show/${idProduct}`)
+      .get(`http://localhost:4000/v1/product/show/${idProduct}`)
       .then((response) => {
         // setresponse.data.data[0]);
         const {

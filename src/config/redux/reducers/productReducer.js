@@ -1,6 +1,6 @@
 const initialState = {
   products: [],
-  product: []
+  product: [],
 };
 
 const productReducer = (state = initialState, action) => {
@@ -9,20 +9,25 @@ const productReducer = (state = initialState, action) => {
       return {
         ...state,
         products: action.payload,
-      }
+      };
     case "showProductByCategory":
-      return{
+      return {
         ...state,
         products: action.payload,
-      }
+      };
     case "showProduct":
-      return{
+      return {
         ...state,
         product: action.payload,
-      }
+      };
+    case "searchProduct":
+      return {
+        ...state,
+        products: action.payload,
+      };
     default:
-        return state
+      return state;
   }
 };
 
-export default productReducer
+export default productReducer;

@@ -17,8 +17,9 @@ export const login = (data, history) => async (dispatch) => {
     localStorage.setItem("token", payload.data.token);
     history.push("/");
   } catch (error) {
-    console.log("error : " + error);
-    swal("Error!", "Wrong email or password", "error");
+    // console.log("err : " + error.response.data);
+    swal("Error!", error.response.data.error[0].msg, "error");
+    // swal("Login Failed!", "Please Check your info", "error");
   }
 };
 
@@ -40,7 +41,7 @@ export const register = (data, history) => async (dispatch) => {
       history.push("/activateAccount");
     }
   } catch (error) {
-    swal("Error!", "Failed register", "error");
+    swal("Error!", error.response.data.error[0].msg, "error");
   }
 };
 

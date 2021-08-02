@@ -25,7 +25,7 @@ export const StoreProduct = () => {
     setorderBy(ord);
   };
 
-  let link = `http://localhost:4000/v1/product/?order=${order}&orderBy=${orderBy}&page=${page}`;
+  let link = `${process.env.REACT_APP_SERVER_URL}/product/?order=${order}&orderBy=${orderBy}&page=${page}`;
 
   if (limit !== "") {
     link += `&limit=${limit}`;
@@ -61,7 +61,7 @@ export const StoreProduct = () => {
         console.log(err);
       });
 
-    axios.get("http://localhost:4000/product").then((response) => {
+    axios.get(`http://localhost:4000/v1/product`).then((response) => {
       setTotalData(response.data.amount);
     });
   };

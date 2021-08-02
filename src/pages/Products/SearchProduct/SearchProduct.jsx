@@ -1,34 +1,23 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useEffect } from "react";
 import { NavbarLogin } from "../../../components/modules/NavbarLogin/NavbarLogin";
 // eslint-disable-next-line no-unused-vars
 import style from "./ShowByCategory.module.css";
 import { Card } from "../../../components/modules/Cards/Card";
-import axios from "axios";
 import { useLocation } from "react-router";
 import qs from 'query-string'
+import { useDispatch, useSelector } from "react-redux";
+import { searchProduct } from "../../../config/redux/actions/productAction";
 
 export const SearchProduct = () => {
+  const dispatch = useDispatch()
   const loc = useLocation()
   const {keyword} = qs.parse(loc.search)
-  const [data, setData] = useState([]);
 
-  const getAllData = () => {
-    axios
-      .get(`http://localhost:4000/product?keyword=${keyword}`)
-      .then((response) => {
-        setData(response.data.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
+  const { products } = useSelector((state) => state.product);
   useEffect(() => {
-    getAllData();
+    dispatch(searchProduct(keyword))
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [keyword]);
-
-  console.log(data);
 
   return (
     <Fragment>
@@ -39,7 +28,7 @@ export const SearchProduct = () => {
         </span>
         <h1 className="fw-bold">{}</h1>
         <div className="cards d-flex flex-wrap">
-        {data ? data.map((item) => (
+        {products ? products.map((item) => (
             <Card
               key={item.id_product}
               id={item.id_product}
@@ -48,7 +37,7 @@ export const SearchProduct = () => {
               price={item.price}
               store={item.store_name}
             />
-          )) : "Data not found"}
+          )) : "products not found"}
         </div>
       </div>
     </Fragment>
