@@ -18,6 +18,7 @@ import { Activation } from "../pages/Auth/Activation/Activation";
 import { ActivationSucess } from "../pages/Auth/ActivationSuccess/ActivationSuccess";
 import PrivateRoute from "./PrivateRoute";
 import PublicRoute from "./PublicRoute";
+import { ShippingAdress } from "../pages/Profile/ShippingAddress/ShippingAddress";
 
 export class router extends Component {
   render() {
@@ -47,7 +48,8 @@ export class router extends Component {
             <PrivateRoute exact path="/product/:id" component={ShowProduct} />
             {/* Customer */}
             <PrivateRoute exact path="/MyBag" component={MyBag} />
-            <PrivateRoute exact path="/profile" component={MyAccount} />
+            <Route exact path="/profile" component={MyAccount} />
+            <Route exact path="/myAddress" component={ShippingAdress} />
             {/* Seller */}
             <Route exact path="/store" component={StoreProfile} />
             <Route exact path="/Product" component={MyProducts} />

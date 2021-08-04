@@ -17,7 +17,7 @@ export const login = (data, history) => async (dispatch) => {
     dispatch({ type: "login", payload });
     localStorage.setItem("token", payload.data.token);
     if (data.roles === "customer") {
-      history.push("/");
+      history.push("/profile");
     } else {
       history.push("/store");
     }
@@ -56,7 +56,7 @@ export const activate = (role, token) => async (dispatch) => {
   } catch (err) {}
 };
 
-export const update = (data, role, history, id) => async (dispatch) => {
+export const update = (data, role, id) => async (dispatch) => {
   if (role === "seller") {
     await axios
       .put(`${process.env.REACT_APP_SERVER_URL}/store/${id}`, data)
@@ -67,5 +67,18 @@ export const update = (data, role, history, id) => async (dispatch) => {
         swal("Failed", err.response.data.error[0].msg, "error");
       });
   } else {
+    await axios
+      .put(`${process.env.REACT_APP_SERVER_URL}/users/${id}`, data)
+      .then(() => {
+        swal("Success", "Succesfully updated data store", "success");
+      })
+      .catch((err) => {
+        swal("Failed", err.response.data.error[0].msg, "error");
+      });
   }
+};
+
+export const logout = (history) => async (dispatch) => {
+  dispatch({ type: "logout" });
+  history.push("/login");
 };

@@ -42,7 +42,7 @@ export const SidebarStore = () => {
                 </div>
                 <ul className="submenuStore">
                   <li className="ms-4 ps-3">
-                    <Link to="">Store Profile</Link>
+                    <Link to="#">Store Profile</Link>
                   </li>
                 </ul>
               </li>

@@ -4,7 +4,7 @@ import style from "./storeContent.module.css";
 import { ButtonNavbarAuth } from "../../base/ButtonNavbarAuth/ButtonNavbarAuth";
 import avatar from "../../../assets/images/profiles/avatar/avatar.jpg"
 import { useDispatch, useSelector } from "react-redux";
-import { update } from "../../../config/redux/actions/userAction";
+import { logout, update } from "../../../config/redux/actions/userAction";
 import { useHistory } from "react-router";
 
 export const StoreContent = () => {
@@ -28,6 +28,10 @@ export const StoreContent = () => {
   const handleSave = (e) => {
     dispatch(update(form, "seller", history, profile.store_id))
   }
+
+  const handleLogout = () => {
+    dispatch(logout(history))
+  }
   return (
     <div className={`container pt-3 ${style.content}`}>
       <h2>My Profile store</h2>
@@ -48,7 +52,7 @@ export const StoreContent = () => {
               <span>Email</span>
             </div>
             <div className="col-9">
-              <AuthInput name="email" value={profile.email} event={handleForm}/>
+              <AuthInput type="email" name="email" value={profile.email} event={handleForm}/>
             </div>
           </div>
           <div className="row">
@@ -79,6 +83,7 @@ export const StoreContent = () => {
         <div className={`col-4 d-flex align-items-center flex-column ${style.profile}`}>
             <img className="rounded-circle" src={avatar} alt="" />
             <button className="btn btn-outline-secondary mt-3 rounded-pill">Select Image</button>
+            <button className="btn btn-outline-danger mt-3 rounded-pill" onClick={() => handleLogout()}>log out now!</button>
         </div>
       </div>
     </div>

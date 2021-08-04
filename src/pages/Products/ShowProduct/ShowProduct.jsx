@@ -1,5 +1,4 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { Navbar } from "../../../components/modules/Navbar/Navbar";
 import { useParams } from "react-router";
 import { ImageProductGallery } from "../../../components/base/imageProductGallery/ImageProductGallery";
 // eslint-disable-next-line no-unused-vars
@@ -48,7 +47,6 @@ export const ShowProduct = () => {
   const description = domConvert.firstChild.outerHTML
   return (
     <Fragment>
-      <Navbar />
       <div className="container">
         <span className="d-inline-block mt-5 mb-5">
           <a href="/">Home</a> &#62; Category &#62; <b>{product.category}</b>

@@ -14,3 +14,18 @@
     width: 110px;
     height: 110px;
 }
+
+.modalWrapper{
+    border:4px dashed var(--customGrey);
+    border-radius: 5px;
+    color: var(--customGrey);
+}
+
+.oldAddress{
+    border:1px solid red;
+    border-radius: 5px;
+}
+
+.changeAddr{
+    color: red;
+}

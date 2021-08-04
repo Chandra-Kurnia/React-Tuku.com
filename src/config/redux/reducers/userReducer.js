@@ -8,7 +8,12 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         profile: action.payload.data,
-      };
+      }
+    case "logout":
+      return{
+        ...state,
+        profile: {}
+      }
     default:
       return state;
   }

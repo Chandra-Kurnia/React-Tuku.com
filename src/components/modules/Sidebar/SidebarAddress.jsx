@@ -1,6 +1,5 @@
 import React from "react";
 import style from "./Sidebar.module.css";
-import { UserContent } from "../UserContent/UserContent";
 import avatar from "../../../assets/images/profiles/avatar/avatar.jpg";
 import editProfile from "../../../assets/icon/edit-profile.svg"
 import user from "../../../assets/icon/user.png"
@@ -8,8 +7,9 @@ import loc from "../../../assets/icon/loc.png"
 import clipboard from "../../../assets/icon/clipboard.png"
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { UserAddress } from "../UserContent/UserAddress";
 
-export const Sidebar = () => {
+export const SidebarAddress = () => {
   const { profile } = useSelector((state) => state.user);
   return (
     <div className="d-flex">
@@ -34,11 +34,11 @@ export const Sidebar = () => {
           <div className={`pt-5 ${style.act}`}>
             <ul>
               <li>
-                <Link to="#" className="d-flex">
+                <Link to="/profile" className="d-flex">
                   <div className={`rounded-circle me-3 ${style.circleWrapper} ${style.circleProfile}`}>
                     <img className={style.imgSide} src={user} alt="" />
                   </div>
-                  <div className={`d-flex align-items-center sidebarActive`}>My Account</div>
+                  <div className={`d-flex align-items-center`}>My Account</div>
                 </Link>
               </li>
               <li>
@@ -46,7 +46,7 @@ export const Sidebar = () => {
                   <div className={`rounded-circle me-3 ${style.circleWrapper} ${style.loc}`}>
                     <img className={style.imgSide} src={loc} alt="" />
                   </div>
-                  <div className="d-flex align-items-center">Shipping Address</div>
+                  <div className="d-flex align-items-center sidebarActive">Shipping Address</div>
                 </Link>
               </li>
               <li>
@@ -62,7 +62,7 @@ export const Sidebar = () => {
         </div>
       </div>
       <div className={`ps-3 pt-5 pe-3 ${style.contentWrapper}`}>
-        <UserContent />
+        <UserAddress/>
       </div>
     </div>
   );
