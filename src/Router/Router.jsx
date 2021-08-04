@@ -19,6 +19,7 @@ import { ActivationSucess } from "../pages/Auth/ActivationSuccess/ActivationSucc
 import PrivateRoute from "./PrivateRoute";
 import PublicRoute from "./PublicRoute";
 import { ShippingAdress } from "../pages/Profile/ShippingAddress/ShippingAddress";
+import { MyOrder } from "../pages/Profile/MyOrders/MyOrder";
 
 export class router extends Component {
   render() {
@@ -50,6 +51,7 @@ export class router extends Component {
             <PrivateRoute exact path="/MyBag" component={MyBag} />
             <Route exact path="/profile" component={MyAccount} />
             <Route exact path="/myAddress" component={ShippingAdress} />
+            <Route exact path="/order" component={MyOrder} />
             {/* Seller */}
             <Route exact path="/store" component={StoreProfile} />
             <Route exact path="/Product" component={MyProducts} />

@@ -50,7 +50,7 @@ export const SidebarAddress = () => {
                 </Link>
               </li>
               <li>
-                <Link to="#" className="d-flex">
+                <Link to="/order" className="d-flex">
                   <div className={`rounded-circle me-3 ${style.circleWrapper} ${style.clip}`}>
                     <img className={style.imgSide} src={clipboard} alt="" />
                   </div>

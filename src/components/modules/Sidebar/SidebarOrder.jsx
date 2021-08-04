@@ -1,6 +1,5 @@
 import React from "react";
 import style from "./Sidebar.module.css";
-import { UserContent } from "../UserContent/UserContent";
 import avatar from "../../../assets/images/profiles/avatar/avatar.jpg";
 import editProfile from "../../../assets/icon/edit-profile.svg"
 import user from "../../../assets/icon/user.png"
@@ -8,8 +7,9 @@ import loc from "../../../assets/icon/loc.png"
 import clipboard from "../../../assets/icon/clipboard.png"
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { UserOrder } from "../UserContent/UserOrder";
 
-export const Sidebar = () => {
+export const SidebarOrder = () => {
   const { profile } = useSelector((state) => state.user);
   return (
     <div className="d-flex">
@@ -38,7 +38,7 @@ export const Sidebar = () => {
                   <div className={`rounded-circle me-3 ${style.circleWrapper} ${style.circleProfile}`}>
                     <img className={style.imgSide} src={user} alt="" />
                   </div>
-                  <div className={`d-flex align-items-center sidebarActive`}>My Account</div>
+                  <div className={`d-flex align-items-center`}>My Account</div>
                 </Link>
               </li>
               <li>
@@ -54,7 +54,7 @@ export const Sidebar = () => {
                   <div className={`rounded-circle me-3 ${style.circleWrapper} ${style.clip}`}>
                     <img className={style.imgSide} src={clipboard} alt="" />
                   </div>
-                  <div className="d-flex align-items-center">My Orders</div>
+                  <div className="d-flex align-items-center sidebarActive">My Orders</div>
                 </Link>
               </li>
             </ul>
@@ -62,7 +62,7 @@ export const Sidebar = () => {
         </div>
       </div>
       <div className={`ps-3 pt-5 pe-3 ${style.contentWrapper}`}>
-        <UserContent />
+        <UserOrder/>
       </div>
     </div>
   );

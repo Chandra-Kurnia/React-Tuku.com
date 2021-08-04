@@ -165,6 +165,61 @@ html, body {
     transition: all 100ms ease-in-out;
 }
 
+/* Not yet paid */
+.table-order-radio-not-paid-yet:checked ~ .table-order-not-paid-yet label{
+    color: red;
+    transition: all 300ms ease-in-out;
+}
+
+.table-order-radio-not-paid-yet:checked ~ .table-order-not-paid-yet{
+    border-bottom: 4px solid red;
+    transition: all 100ms ease-in-out;
+}
+
+/* Packed */
+.table-order-radio-packed:checked ~ .table-order-packed label{
+    color: red;
+    transition: all 300ms ease-in-out;
+}
+
+.table-order-radio-packed:checked ~ .table-order-packed{
+    border-bottom: 4px solid red;
+    transition: all 100ms ease-in-out;
+}
+
+/* Sent */
+.table-order-radio-sent:checked ~ .table-order-sent label{
+    color: red;
+    transition: all 300ms ease-in-out;
+}
+
+.table-order-radio-sent:checked ~ .table-order-sent{
+    border-bottom: 4px solid red;
+    transition: all 100ms ease-in-out;
+}
+
+/* completed */
+.table-order-radio-completed:checked ~ .table-order-completed label{
+    color: red;
+    transition: all 300ms ease-in-out;
+}
+
+.table-order-radio-completed:checked ~ .table-order-completed{
+    border-bottom: 4px solid red;
+    transition: all 100ms ease-in-out;
+}
+
+/* cancel */
+.table-order-radio-cancel:checked ~ .table-order-cancel label{
+    color: red;
+    transition: all 300ms ease-in-out;
+}
+
+.table-order-radio-cancel:checked ~ .table-order-cancel{
+    border-bottom: 4px solid red;
+    transition: all 100ms ease-in-out;
+}
+
 /* Table product */
 .table-order-product{
     border-radius: 4px;
