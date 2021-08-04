@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState, useRef } from "react";
 import style from "./storeContent.module.css";
 import { Input } from "../../base/Input/Input";
 import { ColorPicker } from "../../base/ColorPicker/ColorPicker";
@@ -6,8 +6,10 @@ import axios from "axios";
 import { useHistory } from "react-router";
 import swal from "sweetalert";
 import { LoaderPage } from "../../base/LoaderPage/LoaderPage";
+import { Editor } from "@tinymce/tinymce-react";
 
 export const StoreUpdate = (props) => {
+  const editorRef = useRef(null);
   const [Loading, setLoading] = useState(false);
   const move = useHistory();
   const { idProduct } = props;
@@ -36,7 +38,7 @@ export const StoreUpdate = (props) => {
         setCategory(category);
         setcolor(color);
         setcondition(status);
-        setUrlImage(image);
+        setimage(`${process.env.REACT_APP_SERVER_IMAGE_URL}/${image}`);
         setdesc(description);
       })
       .catch((err) => {
@@ -46,7 +48,7 @@ export const StoreUpdate = (props) => {
 
   useEffect(() => {
     getData();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const [title, setTitle] = useState("");
@@ -57,37 +59,57 @@ export const StoreUpdate = (props) => {
   const [ctg, setCategory] = useState("");
   const [color, setcolor] = useState("");
   const [condition, setcondition] = useState("");
-  const [urlImage, setUrlImage] = useState("");
+  const [image, setimage] = useState("");
   const [desc, setdesc] = useState("");
 
+  const dataProduct = {
+    productName: title,
+    store_id: 6,
+    category: idCategory,
+    color,
+    size,
+    price,
+    quantity: stock,
+    status: condition,
+    image: image,
+    description: desc,
+  };
+
+  const handleImage = (e) => {
+    setimage(e.target.files[0]);
+  };
+
   const handleUpdate = () => {
-    const dataProduct = {
-      productName: title,
-      store_id: 6,
-      category: idCategory,
-      color,
-      size,
-      price,
-      quantity: stock,
-      status: condition,
-      image: urlImage,
-      description: desc,
-    };
+    console.log(dataProduct);
+    const formData = new FormData();
+    formData.append("productName", dataProduct.productName);
+    formData.append("store_id", dataProduct.store_id);
+    formData.append("category", dataProduct.category);
+    formData.append("color", dataProduct.color);
+    formData.append("size", dataProduct.size);
+    formData.append("price", dataProduct.price);
+    formData.append("quantity", dataProduct.quantity);
+    formData.append("status", dataProduct.status);
+    formData.append("description", dataProduct.description);
+    formData.append("image", dataProduct.image);
+    console.log(formData);
     axios
-      .put(`http://localhost:4000/product/${idProduct}`, dataProduct)
+      .put(`${process.env.REACT_APP_SERVER_URL}/product/${idProduct}`, formData)
       .then(() => {
-        swal("Berhasil", "Data berhasil di update", "success").then((value) => {
-          if (value | (value === false)) {
-            setLoading(true);
-            setTimeout(() => {
-              move.push("/product");
-              setLoading(false);
-            }, 300);
+        swal("Success", "Data Successfully updated", "success").then(
+          (value) => {
+            if (value | (value === false)) {
+              setLoading(true);
+              setTimeout(() => {
+                move.push("/product");
+                setLoading(false);
+              }, 300);
+            }
           }
-        });
+        );
       })
-      .catch(() => {
-        swal("Gagal", "Data gagal diupdate");
+      .catch((err) => {
+        swal("Failed", err.response.data.error[0].msg, "error");
       });
   };
 
@@ -231,18 +253,33 @@ export const StoreUpdate = (props) => {
           className="container p-4"
           style={{ border: "3px dashed var(--customGrey)" }}
         >
-          <img src={urlImage} alt="" style={{ width: "300px" }} />
+          <img
+            src={`${process.env.REACT_APP_SERVER_IMAGE_URL}/${image}`}
+            alt=""
+            style={{ width: "300px" }}
+          />
           <hr />
-          <input
+          {/* <input
             type="text"
             className="form-control mb-3"
             defaultValue={urlImage}
-            onFocus={(e) => setUrlImage(e.target.value)}
-          />
+            onChange={(e) => setUrlImage(e.target.value)}
+          /> */}
           <div className="text-center">
-            <button className="btn btn-outline-secondary rounded-pill">
+            <input
+              // value={`${process.env.REACT_APP_SERVER_IMAGE_URL}/${image}`}
+              type="file"
+              name=""
+              id="inputFile"
+              className="d-none"
+              onChange={handleImage}
+            />
+            <label
+              htmlFor="inputFile"
+              className="btn btn-outline-secondary rounded-pill"
+            >
               Upload Foto
-            </button>
+            </label>
           </div>
         </div>
       </div>
@@ -250,14 +287,27 @@ export const StoreUpdate = (props) => {
         <h2>Description</h2>
         <hr />
         <div className="container">
-          <textarea
-            name=""
-            id="product-desc"
-            cols="115"
-            rows="10"
-            defaultValue={desc}
-            onFocus={(e) => setdesc(e.target.value)}
-          ></textarea>
+          <Editor
+            textareaName="description"
+            onEditorChange={(e) => setdesc(e)}
+            onInit={(evt, editor) => (editorRef.current = editor)}
+            // initialValue={desc}
+            init={{
+              height: 500,
+              menubar: false,
+              plugins: [
+                "advlist autolink lists link image charmap print preview anchor",
+                "searchreplace visualblocks code fullscreen",
+                "insertdatetime media table paste code help wordcount",
+              ],
+              toolbar:
+                "undo redo | " +
+                "bold italic backcolor | " +
+                "bullist numlist | ",
+              content_style:
+                "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
+            }}
+          />
         </div>
       </div>
       <div className="container d-flex flex-row-reverse mb-5">

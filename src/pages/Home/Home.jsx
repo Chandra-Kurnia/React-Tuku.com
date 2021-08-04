@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Card } from "../../components/modules/Cards/Card";
-import { Navbar } from "../../components/modules/Navbar/Navbar";
 import { Carousel } from "../../components/modules/Slider/Carousel/Carousel";
 import { SliderCategory } from "../../components/modules/Slider/SliderCategory/SliderCategory";
 import { getProduct } from "../../config/redux/actions/productAction";
@@ -16,7 +15,6 @@ export const Home = (props) => {
   const { products } = useSelector((state) => state.product);
   return (
     <div>
-      <Navbar history={props.history} />
       <Carousel />
       <section className="container mt-5">
         <h2 className="fw-bold">Category</h2>

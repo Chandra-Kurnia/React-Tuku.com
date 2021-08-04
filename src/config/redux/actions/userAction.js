@@ -12,14 +12,17 @@ export const login = (data, history) => async (dispatch) => {
       "http://localhost:4000/v1/users/login",
       form
     );
-    const payload = result.data;
+    result.data.roles = data.roles
+    const payload = result.data
     dispatch({ type: "login", payload });
     localStorage.setItem("token", payload.data.token);
-    history.push("/");
+    if (data.roles === "customer") {
+      history.push("/");
+    } else {
+      history.push("/store");
+    }
   } catch (error) {
-    // console.log("err : " + error.response.data);
     swal("Error!", error.response.data.error[0].msg, "error");
-    // swal("Login Failed!", "Please Check your info", "error");
   }
 };
 
@@ -49,6 +52,5 @@ export const activate = (role, token) => async (dispatch) => {
   try{
     axios.get(`http://localhost:4000/v1/${role}/activation/${token}`)
   }catch(err){
-
   }
 };

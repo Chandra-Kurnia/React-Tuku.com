@@ -6,14 +6,15 @@ import { Filter } from "../Filter/Filter";
 import style from "./NavbarLogin.module.css";
 import { NavbarTrolly } from "../../base/NavbarTrolly/NavbarTrolly";
 import avatar from "../../../assets/images/profiles/avatar/avatar.jpg";
+import { Link } from "react-router-dom";
 
 export const NavbarLogin = () => {
   return (
     <nav className="shadow navbar navbar-expand-lg navbar-light bg-light pt-3 pb-3">
       <div className="container-nav container">
-        <a href="/">
+        <Link to="/">
           <NavbarLogos />
-        </a>
+        </Link>
         <button
           className={`navbar-toggler ${style.btnTogler}`}
           type="button"
@@ -36,22 +37,22 @@ export const NavbarLogin = () => {
             className={`navbar-nav d-flex justify-content-lg-end justify-content-around flex-row pt-lg-0 pt-3 ${style.navItemWrapper}`}
           >
             <li className="nav-item d-inline-block ps-lg-5 ps-2">
-              <a href="/MyBag">
+              <Link to="/MyBag">
                 <NavbarTrolly margin="me-0" />
-              </a>
+              </Link>
             </li>
             <li className="nav-item d-inline-block ps-lg-5 ps-2">
-              <a href="/store">
+              <Link to="">
                 <i className="fa fa-bell"></i>
-              </a>
+              </Link>
             </li>
             <li className="nav-item d-inline-block ps-lg-5 ps-2">
-              <a href="#/">
+              <Link to="#/">
                 <i className="fa fa-envelope"></i>
-              </a>
+              </Link>
             </li>
             <li className="nav-item d-inline-block ps-lg-5 ps-2">
-              <a href="/profile">
+              <Link to="/profile">
                 <label htmlFor="sidebar-toggle">
                   <img
                     src={avatar}
@@ -59,7 +60,7 @@ export const NavbarLogin = () => {
                     alt=""
                   />
                 </label>
-              </a>
+              </Link>
             </li>
           </ul>
         </div>

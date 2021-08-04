@@ -51,7 +51,6 @@ export const StoreProduct = () => {
   }, [keyword, order, orderBy, limit, page]);
 
   const getAllData = () => {
-    console.log(link);
     axios
       .get(link)
       .then((response) => {
@@ -61,23 +60,36 @@ export const StoreProduct = () => {
         console.log(err);
       });
 
-    axios.get(`http://localhost:4000/v1/product`).then((response) => {
+    axios.get(`${process.env.REACT_APP_SERVER_URL}/product`).then((response) => {
       setTotalData(response.data.amount);
     });
   };
 
   const handleDelete = (e) => {
     const id_product = e;
-    swal("Berhasil", "Product sukses dihapus", "success").then((value) => {
-      if (value | (value === false)) {
-        setLoading(true);
-        axios.delete(`http://localhost:4000/v1/product/${id_product}`);
-        setTimeout(() => {
-          getAllData();
-          setLoading(false);
-        }, 500);
-      }
-    });
+    axios.delete(`${process.env.REACT_APP_SERVER_URL}/product/${id_product}`)
+    .then(() => {
+      swal("Success", "Product  succesfully deleted", "success").then((value) => {
+        if (value | (value === false)) {
+          setLoading(true);
+          setTimeout(() => {
+            getAllData();
+            setLoading(false);
+          }, 500);
+        }
+      });
+    })
+    .catch(err => {
+      swal("Failed", err.response.data.error[0].msg, "error").then((value) => {
+        if (value | (value === false)) {
+          setLoading(true);
+          setTimeout(() => {
+            getAllData();
+            setLoading(false);
+          }, 500);
+        }
+      });
+    })
   };
 
   return (

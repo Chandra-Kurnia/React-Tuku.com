@@ -22,7 +22,7 @@ export const ShowProduct = () => {
   useEffect(() => {
     dispatch(showProduct(id));
     dispatch(showProductByCategory(product.category));
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handlePlusCount = () => {
@@ -39,6 +39,13 @@ export const ShowProduct = () => {
       setCount(count - 1);
     }
   };
+
+  const domConvert = new DOMParser().parseFromString(
+    product.description,
+    "text/xml"
+  );
+  console.log(domConvert.firstChild.outerHTML);
+  const description = domConvert.firstChild.outerHTML
   return (
     <Fragment>
       <Navbar />
@@ -149,7 +156,8 @@ export const ShowProduct = () => {
             {product.status}
           </span>
           <span className="fw-bold fs-5">Description</span>
-          <p>{product.description}</p>
+          {/* <p>{product.description}</p> */}
+          <p>{description}</p>
           <span className="mt-3 fw-bold fs-5">Product Review</span>
           <hr />
           <h2 className="fw-bold">You can also like this</h2>

@@ -2,17 +2,18 @@ import React, { Fragment, useState, useRef } from "react";
 import style from "./storeContent.module.css";
 import { Input } from "../../base/Input/Input";
 import { ColorPicker } from "../../base/ColorPicker/ColorPicker";
-import axios from "axios";
 import { useHistory } from "react-router";
-import swal from "sweetalert";
 import { LoaderPage } from "../../base/LoaderPage/LoaderPage";
 import { Editor } from "@tinymce/tinymce-react";
+import { useDispatch, useSelector } from "react-redux";
+import { createProduct } from "../../../config/redux/actions/productAction";
 
 export const StoreSell = () => {
+  const dispatch = useDispatch()
   const editorRef = useRef(null);
-
-  const [Loading, setLoading] = useState(false);
-  const move = useHistory();
+  const { Loading } = useSelector((state) => state.product);
+  // const [Loading, setLoading] = useState(false);
+  const history = useHistory();
   const [title, setTitle] = useState("");
   const [price, setprice] = useState("");
   const [stock, setstock] = useState("");
@@ -20,57 +21,58 @@ export const StoreSell = () => {
   const [category, setCategory] = useState("");
   const [color, setcolor] = useState("");
   const [condition, setcondition] = useState("");
-  const [urlImage, setUrlImage] = useState("");
+  const [image, setimage] = useState();
   const [desc, setdesc] = useState("");
 
-  const handleSave = () => {
-    if (
-      !title |
-      !price |
-      isNaN.price |
-      !stock |
-      isNaN.stock |
-      !size |
-      !color |
-      !condition |
-      !desc
-    ) {
-      console.log("wrong input");
-    } else {
-      const dataProduct = {
-        productName: title,
-        store_id: 6,
-        category,
-        color,
-        size,
-        price,
-        quantity: stock,
-        status: condition,
-        description: desc,
-        image: urlImage,
-      };
+  let dataProduct = {
+    productName: title,
+    store_id: 6,
+    category,
+    color,
+    size,
+    price,
+    quantity: stock,
+    status: condition,
+    description: desc,
+    image: image,
+  };
 
-      console.log(dataProduct);
-      axios
-        .post("http://localhost:4000/v1/product/", dataProduct)
-        .then(() => {
-          swal("Berhasil", "Product sukses ditambahkan", "success").then(
-            (value) => {
-              if (value | (value === false)) {
-                setLoading(true);
-                setTimeout(() => {
-                  move.push("/product");
-                  setLoading(false);
-                }, 200);
-              }
-            }
-          );
-        })
-        .catch((err) => {
-          alert("Failed");
-          console.log(err);
-        });
-    }
+  const handleImage = (e) => {
+    setimage(e.target.files[0])
+  };
+  
+  const handleSave = () => {
+    dispatch(createProduct(dataProduct, history))
+    // const formData = new FormData()
+    // formData.append('productName', dataProduct.productName)
+    // formData.append('store_id', dataProduct.store_id)
+    // formData.append('category', dataProduct.category)
+    // formData.append('color', dataProduct.color)
+    // formData.append('size', dataProduct.size)
+    // formData.append('price', dataProduct.price)
+    // formData.append('quantity', dataProduct.quantity)
+    // formData.append('status', dataProduct.status)
+    // formData.append('description', dataProduct.description)
+    // formData.append('image', dataProduct.image)
+    // axios
+    //   .post(`${process.env.REACT_APP_SERVER_URL}/product/`, formData)
+    //   .then(() => {
+    //     swal("Success", "Product successfully inserted", "success").then(
+    //       (value) => {
+    //         if (value | (value === false)) {
+    //           setLoading(true);
+    //           setTimeout(() => {
+    //             move.push("/product");
+    //             setLoading(false);
+    //           }, 200);
+    //         }
+    //       }
+    //     );
+    //   })
+    //   .catch((err) => {
+    //     swal("Failed", err.response.data.error[0].msg, "error");
+    //     // console.log(err.response);
+    //   });
   };
 
   return (
@@ -198,17 +200,27 @@ export const StoreSell = () => {
           className="container p-4"
           style={{ border: "3px dashed var(--customGrey)" }}
         >
-          <img src={urlImage} alt="" style={{ width: "300px" }} />
+          <img src="" alt="" style={{ width: "300px" }} />
           <hr />
-          <input
+          {/* <input
             type="text"
             className="form-control mb-3"
             onChange={(e) => setUrlImage(e.target.value)}
-          />
+          /> */}
           <div className="text-center">
-            <button className="btn btn-outline-secondary rounded-pill">
+            <input
+              type="file"
+              name=""
+              id="inputFile"
+              className="d-none"
+              onChange={handleImage}
+            />
+            <label
+              htmlFor="inputFile"
+              className="btn btn-outline-secondary rounded-pill"
+            >
               Upload Foto
-            </button>
+            </label>
           </div>
         </div>
       </div>
@@ -216,16 +228,9 @@ export const StoreSell = () => {
         <h2>Description</h2>
         <hr />
         <div className="container">
-          {/* <textarea
-            name=""
-            id="product-desc"
-            cols="115"
-            rows="10"
-            onChange={(e) => setdesc(e.target.value)}
-          ></textarea> */}
           <Editor
             textareaName="description"
-            onEditorChange={e => setdesc(e)}
+            onEditorChange={(e) => setdesc(e)}
             onInit={(evt, editor) => (editorRef.current = editor)}
             init={{
               height: 500,
