@@ -37,7 +37,7 @@ export const showProduct = (id) => async (dispatch) => {
 
 export const searchProduct = (keyword) => async (dispatch) => {
   await axios
-    .get(`http://localhost:4000/v1/product?keyword=${keyword}`)
+    .get(`${process.env.REACT_APP_SERVER_URL}/product?keyword=${keyword}`)
     .then((res) => {
       dispatch({ type: "searchProduct", payload: res.data.data });
     })

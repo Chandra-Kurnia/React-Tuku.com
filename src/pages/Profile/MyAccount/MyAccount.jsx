@@ -6,7 +6,7 @@ import style from './MyAccount.module.css'
 export const MyAccount = () => {
     return (
         <div className={`${style.wrapper}`}>
-            <NavbarLogin/>
+            {/* <NavbarLogin/> */}
             <Sidebar content="UserContent"/>
         </div>
     )

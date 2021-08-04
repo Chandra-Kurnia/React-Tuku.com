@@ -1,10 +1,33 @@
-import React from "react";
+import React, {useState} from "react";
 import { AuthInput } from "../../base/AuthInput/AuthInput";
 import style from "./storeContent.module.css";
 import { ButtonNavbarAuth } from "../../base/ButtonNavbarAuth/ButtonNavbarAuth";
 import avatar from "../../../assets/images/profiles/avatar/avatar.jpg"
+import { useDispatch, useSelector } from "react-redux";
+import { update } from "../../../config/redux/actions/userAction";
+import { useHistory } from "react-router";
 
 export const StoreContent = () => {
+  const history = useHistory()
+  const dispatch = useDispatch()
+  const { profile } = useSelector((state) => state.user);
+  const [form, setform] = useState({
+    storeName: profile.store_name,
+    email: profile.email,
+    phoneNumber: profile.phone_number,
+    storeDesc: profile.store_desc,
+  })
+
+  const handleForm = (e) => {
+    setform({
+      ...form,
+      [e.target.name]: e.target.value,
+    })
+  }
+
+  const handleSave = (e) => {
+    dispatch(update(form, "seller", history, profile.store_id))
+  }
   return (
     <div className={`container pt-3 ${style.content}`}>
       <h2>My Profile store</h2>
@@ -17,7 +40,7 @@ export const StoreContent = () => {
               <span>Store Name</span>
             </div>
             <div className="col-9">
-              <AuthInput name="storeName" value="Johanes Mikael" />
+              <AuthInput name="storeName" value={profile.store_name} event={handleForm}/>
             </div>
           </div>
           <div className="row">
@@ -25,7 +48,7 @@ export const StoreContent = () => {
               <span>Email</span>
             </div>
             <div className="col-9">
-              <AuthInput name="email" value="Johanes@gmail.com" />
+              <AuthInput name="email" value={profile.email} event={handleForm}/>
             </div>
           </div>
           <div className="row">
@@ -33,7 +56,7 @@ export const StoreContent = () => {
               <span>Phone Number</span>
             </div>
             <div className="col-9">
-              <AuthInput name="phoneNumber" value="08901289012" />
+              <AuthInput name="phoneNumber" value={profile.phone_number} event={handleForm}/>
             </div>
           </div>
           <div className="row">
@@ -41,7 +64,7 @@ export const StoreContent = () => {
               <span>Store Description</span>
             </div>
             <div className="col-9">
-              <textarea className={style.textarea} name="storeDesc" id="" cols="30" rows="10"></textarea>
+              <textarea devaultValue={profile.store_desc} className={style.textarea} name="storeDesc" id="" cols="30" rows="10" onChange={handleForm}></textarea>
             </div>
           </div>
 
@@ -49,7 +72,7 @@ export const StoreContent = () => {
             <div className="col-3 d-flex justify-content-end align-items-center">
             </div>
             <div className="col-9">
-              <ButtonNavbarAuth css="login" text="Save" margin="ms-0"/>
+              <ButtonNavbarAuth event={(e) => handleSave(e)} css="login" text="Save" margin="ms-0"/>
             </div>
           </div>
         </div>

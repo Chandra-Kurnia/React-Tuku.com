@@ -7,7 +7,7 @@ export const NavbarStore = () => {
   return (
     <nav className="shadow navbar navbar-expand-lg navbar-light bg-light pt-3 pb-3">
       <div className="container-nav container">
-        <NavbarLogos />
+        <NavbarLogos path="/store"/>
         <button
           className={`navbar-toggler ${style.btnTogler}`}
           type="button"

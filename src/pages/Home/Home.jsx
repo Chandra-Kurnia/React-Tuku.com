@@ -13,6 +13,7 @@ export const Home = (props) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const { products } = useSelector((state) => state.product);
+  console.log(products);
   return (
     <div>
       <Carousel />
@@ -23,7 +24,7 @@ export const Home = (props) => {
         <h2 className="fw-bold">New</h2>
         <span>You've never seen it before!</span>
         <div className="cards d-flex flex-wrap justify-content-center">
-          {products.map((product) => (
+          {products && products.map((product) => (
             <Card
               key={product.id_product}
               id={product.id_product}

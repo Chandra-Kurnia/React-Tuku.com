@@ -32,7 +32,7 @@ export const Sidebar = () => {
           <div className={`pt-5 ${style.act}`}>
             <ul>
               <li>
-                <Link to="" className="d-flex">
+                <Link to="#" className="d-flex">
                   <div className={`rounded-circle me-3 ${style.circleWrapper} ${style.circleProfile}`}>
                     <img className={style.imgSide} src={user} alt="" />
                   </div>
@@ -40,7 +40,7 @@ export const Sidebar = () => {
                 </Link>
               </li>
               <li>
-                <Link to="" className="d-flex">
+                <Link to="#" className="d-flex">
                   <div className={`rounded-circle me-3 ${style.circleWrapper} ${style.loc}`}>
                     <img className={style.imgSide} src={loc} alt="" />
                   </div>
@@ -48,7 +48,7 @@ export const Sidebar = () => {
                 </Link>
               </li>
               <li>
-                <Link to="" className="d-flex">
+                <Link to="#" className="d-flex">
                   <div className={`rounded-circle me-3 ${style.circleWrapper} ${style.clip}`}>
                     <img className={style.imgSide} src={clipboard} alt="" />
                   </div>

@@ -9,11 +9,11 @@ export const login = (data, history) => async (dispatch) => {
       roles: data.roles,
     };
     const result = await axios.post(
-      "http://localhost:4000/v1/users/login",
+      `${process.env.REACT_APP_SERVER_URL}/users/login`,
       form
     );
-    result.data.roles = data.roles
-    const payload = result.data
+    result.data.roles = data.roles;
+    const payload = result.data;
     dispatch({ type: "login", payload });
     localStorage.setItem("token", payload.data.token);
     if (data.roles === "customer") {
@@ -37,10 +37,10 @@ export const register = (data, history) => async (dispatch) => {
       pass: data.pass,
     };
     if (data.roles === "customer") {
-      await axios.post("http://localhost:4000/v1/users", form);
+      await axios.post(`${process.env.REACT_APP_SERVER_URL}/users`, form);
       history.push("/activateAccount");
     } else {
-      await axios.post("http://localhost:4000/v1/store", form);
+      await axios.post(`${process.env.REACT_APP_SERVER_URL}/store`, form);
       history.push("/activateAccount");
     }
   } catch (error) {
@@ -49,8 +49,23 @@ export const register = (data, history) => async (dispatch) => {
 };
 
 export const activate = (role, token) => async (dispatch) => {
-  try{
-    axios.get(`http://localhost:4000/v1/${role}/activation/${token}`)
-  }catch(err){
+  try {
+    axios.get(
+      `${process.env.REACT_APP_SERVER_URL}/${role}/activation/${token}`
+    );
+  } catch (err) {}
+};
+
+export const update = (data, role, history, id) => async (dispatch) => {
+  if (role === "seller") {
+    await axios
+      .put(`${process.env.REACT_APP_SERVER_URL}/store/${id}`, data)
+      .then(() => {
+        swal("Success", "Succesfully updated data store", "success");
+      })
+      .catch((err) => {
+        swal("Failed", err.response.data.error[0].msg, "error");
+      });
+  } else {
   }
 };

@@ -38,7 +38,7 @@ export const StoreUpdate = (props) => {
         setCategory(category);
         setcolor(color);
         setcondition(status);
-        setimage(`${process.env.REACT_APP_SERVER_IMAGE_URL}/${image}`);
+        setimage(image);
         setdesc(description);
       })
       .catch((err) => {
@@ -291,7 +291,7 @@ export const StoreUpdate = (props) => {
             textareaName="description"
             onEditorChange={(e) => setdesc(e)}
             onInit={(evt, editor) => (editorRef.current = editor)}
-            // initialValue={desc}
+            initialValue={desc}
             init={{
               height: 500,
               menubar: false,
