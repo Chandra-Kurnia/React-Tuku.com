@@ -1,5 +1,4 @@
 import React, { Fragment, useEffect } from "react";
-import { NavbarLogin } from "../../../components/modules/NavbarLogin/NavbarLogin";
 import { useParams } from "react-router";
 // eslint-disable-next-line no-unused-vars
 import style from "./ShowByCategory.module.css";
@@ -20,7 +19,6 @@ export const ShowByCategory = () => {
 
   return (
     <Fragment>
-      <NavbarLogin />
       <div className="container mt-5">
         <span className="d-inline-block mb-5">
           <a href="/">Home</a> &#62; Category &#62; <b>{category}</b>

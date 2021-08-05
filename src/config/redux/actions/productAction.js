@@ -1,5 +1,5 @@
 import axios from "axios";
-import swal from 'sweetalert'
+import swal from "sweetalert";
 
 export const getProduct = () => async (dispatch) => {
   await axios
@@ -46,28 +46,34 @@ export const searchProduct = (keyword) => async (dispatch) => {
     });
 };
 
-export const createProduct = (dataProduct, history) => async (dispatch) => {
-  const formData = new FormData()
-    formData.append('productName', dataProduct.productName)
-    formData.append('store_id', dataProduct.store_id)
-    formData.append('category', dataProduct.category)
-    formData.append('color', dataProduct.color)
-    formData.append('size', dataProduct.size)
-    formData.append('price', dataProduct.price)
-    formData.append('quantity', dataProduct.quantity)
-    formData.append('status', dataProduct.status)
-    formData.append('description', dataProduct.description)
-    formData.append('image', dataProduct.image)
+export const createProduct =
+  (dataProduct, history, token) => async (dispatch) => {
+    const formData = new FormData();
+    formData.append("productName", dataProduct.productName);
+    formData.append("store_id", dataProduct.store_id);
+    formData.append("category", dataProduct.category);
+    formData.append("color", dataProduct.color);
+    formData.append("size", dataProduct.size);
+    formData.append("price", dataProduct.price);
+    formData.append("quantity", dataProduct.quantity);
+    formData.append("status", dataProduct.status);
+    formData.append("description", dataProduct.description);
+    formData.append("image", dataProduct.image);
+    console.log(formData);
     await axios
-      .post(`${process.env.REACT_APP_SERVER_URL}/product/`, formData)
+      .post(`${process.env.REACT_APP_SERVER_URL}/product/`, formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        }
+      })
       .then(() => {
         swal("Success", "Product successfully inserted", "success").then(
           (value) => {
             if (value | (value === false)) {
-              dispatch({type: "loading", payload: true})
+              dispatch({ type: "loading", payload: true });
               setTimeout(() => {
                 history.push("/product");
-                dispatch({type: "loading", payload: false})
+                dispatch({ type: "loading", payload: false });
               }, 200);
             }
           }
@@ -75,6 +81,12 @@ export const createProduct = (dataProduct, history) => async (dispatch) => {
       })
       .catch((err) => {
         swal("Failed", err.response.data.error[0].msg, "error");
-        // console.log(err.response);
+        console.log(err.response);
       });
-}
+  };
+
+export const addCart = (product) => async (dispatch, getState) => {
+  const {cart: newItemCart} = getState().cart;
+  newItemCart.push(product)
+  dispatch({type: 'addCart', payload: newItemCart})
+};

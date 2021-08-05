@@ -9,6 +9,11 @@ import { logout, update } from "../../../config/redux/actions/userAction";
 
 export const UserContent = () => {
   const { profile } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const history = useHistory();
+  if(profile.role !== "customer"){
+    dispatch(logout(history));
+  }
   const [form, setform] = useState({
     name: profile.name,
     email: profile.email,
@@ -18,8 +23,6 @@ export const UserContent = () => {
     monthBirth: 6,
     yearBirth: 1999
   });
-  const history = useHistory();
-  const dispatch = useDispatch();
   const handleForm = (e) => {
     setform({
       ...form,

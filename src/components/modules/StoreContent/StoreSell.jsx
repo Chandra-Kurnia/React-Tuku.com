@@ -7,13 +7,19 @@ import { LoaderPage } from "../../base/LoaderPage/LoaderPage";
 import { Editor } from "@tinymce/tinymce-react";
 import { useDispatch, useSelector } from "react-redux";
 import { createProduct } from "../../../config/redux/actions/productAction";
+import { logout } from "../../../config/redux/actions/userAction";
 
 export const StoreSell = () => {
-  const dispatch = useDispatch()
+  const token = localStorage.getItem("token");
+  const dispatch = useDispatch();
   const editorRef = useRef(null);
   const { Loading } = useSelector((state) => state.product);
+  const { profile } = useSelector((state) => state.user);
   // const [Loading, setLoading] = useState(false);
   const history = useHistory();
+  if (profile.role !== "seller") {
+    dispatch(logout(history));
+  }
   const [title, setTitle] = useState("");
   const [price, setprice] = useState("");
   const [stock, setstock] = useState("");
@@ -38,41 +44,11 @@ export const StoreSell = () => {
   };
 
   const handleImage = (e) => {
-    setimage(e.target.files[0])
+    setimage(e.target.files[0]);
   };
-  
+
   const handleSave = () => {
-    dispatch(createProduct(dataProduct, history))
-    // const formData = new FormData()
-    // formData.append('productName', dataProduct.productName)
-    // formData.append('store_id', dataProduct.store_id)
-    // formData.append('category', dataProduct.category)
-    // formData.append('color', dataProduct.color)
-    // formData.append('size', dataProduct.size)
-    // formData.append('price', dataProduct.price)
-    // formData.append('quantity', dataProduct.quantity)
-    // formData.append('status', dataProduct.status)
-    // formData.append('description', dataProduct.description)
-    // formData.append('image', dataProduct.image)
-    // axios
-    //   .post(`${process.env.REACT_APP_SERVER_URL}/product/`, formData)
-    //   .then(() => {
-    //     swal("Success", "Product successfully inserted", "success").then(
-    //       (value) => {
-    //         if (value | (value === false)) {
-    //           setLoading(true);
-    //           setTimeout(() => {
-    //             move.push("/product");
-    //             setLoading(false);
-    //           }, 200);
-    //         }
-    //       }
-    //     );
-    //   })
-    //   .catch((err) => {
-    //     swal("Failed", err.response.data.error[0].msg, "error");
-    //     // console.log(err.response);
-    //   });
+    dispatch(createProduct(dataProduct, history, token));
   };
 
   return (

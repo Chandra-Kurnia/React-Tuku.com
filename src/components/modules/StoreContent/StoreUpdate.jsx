@@ -253,11 +253,11 @@ export const StoreUpdate = (props) => {
           className="container p-4"
           style={{ border: "3px dashed var(--customGrey)" }}
         >
-          <img
+          {/* <img
             src={`${process.env.REACT_APP_SERVER_IMAGE_URL}/${image}`}
             alt=""
             style={{ width: "300px" }}
-          />
+          /> */}
           <hr />
           {/* <input
             type="text"

@@ -80,5 +80,6 @@ export const update = (data, role, id) => async (dispatch) => {
 
 export const logout = (history) => async (dispatch) => {
   dispatch({ type: "logout" });
+  localStorage.removeItem('token')
   history.push("/login");
 };

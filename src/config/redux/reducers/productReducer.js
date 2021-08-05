@@ -31,6 +31,11 @@ const productReducer = (state = initialState, action) => {
         ...state,
         loading: action.payload,
       }
+    case "addCart":
+      return{
+        ...state,
+        cart: action.payload
+      }
     default:
       return state;
   }

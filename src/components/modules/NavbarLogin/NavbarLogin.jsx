@@ -38,7 +38,7 @@ export const NavbarLogin = () => {
           >
             <li className="nav-item d-inline-block ps-lg-5 ps-2">
               <Link to="/MyBag">
-                <NavbarTrolly margin="me-0" />
+                <NavbarTrolly margin="me-0" href="/MyBag"/>
               </Link>
             </li>
             <li className="nav-item d-inline-block ps-lg-5 ps-2">

@@ -8,6 +8,7 @@ import { ButtonCount } from "../../../components/base/ButtonCount/ButtonCount";
 import { Card } from "../../../components/modules/Cards/Card";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  addCart,
   showProduct,
   showProductByCategory,
 } from "../../../config/redux/actions/productAction";
@@ -17,6 +18,7 @@ export const ShowProduct = () => {
   const { id } = useParams();
   const [count, setCount] = useState(1);
   const { products, product } = useSelector((state) => state.product);
+  const { cart } = useSelector((state) => state.cart);
 
   useEffect(() => {
     dispatch(showProduct(id));
@@ -39,12 +41,20 @@ export const ShowProduct = () => {
     }
   };
 
-  const domConvert = new DOMParser().parseFromString(
-    product.description,
-    "text/xml"
-  );
-  console.log(domConvert.firstChild.outerHTML);
-  const description = domConvert.firstChild.outerHTML
+  const productCart = {
+    id_product: product.id_product,
+    product_name: product.product_name,
+    image: product.image,
+    store_name: product.store_name,
+    quantity: count,
+    price: product.price * count,
+  };
+
+  const bag = () => {
+    dispatch(addCart(productCart));
+    console.log(cart);
+  };
+
   return (
     <Fragment>
       <div className="container">
@@ -85,7 +95,7 @@ export const ShowProduct = () => {
               <span>
                 <h3>{product.product_name}</h3>
               </span>
-              <span className={`fw-bold gray`}>Shop</span>
+              <span className={`fw-bold gray`}>{product.store_name}</span>
               <div className="d-flex">
                 <span className={`fa fa-star pe-1 starChecked`}></span>
                 <span className={`fa fa-star pe-1 starChecked`}></span>
@@ -103,9 +113,6 @@ export const ShowProduct = () => {
               <span className={`pb-3 ${style.color}`}>Color</span>
               <div className="d-flex">
                 <ColorPicker color="Black" type="checkbox" value={() => {}} />
-                {/* <ColorPicker color="Primary" type="radio" value={() => {}} />
-                <ColorPicker color="darkBlue" type="radio" value={() => {}}/>
-                <ColorPicker color="lightGreen" type="radio" value={() => {}}/> */}
               </div>
             </div>
             <div className="row w-50 pt-3">
@@ -131,7 +138,10 @@ export const ShowProduct = () => {
                   </button>
                 </div>
                 <div className="col-3 pe-2">
-                  <button className="btn btn-outline-secondary rounded-pill w-100">
+                  <button
+                    className="btn btn-outline-secondary rounded-pill w-100"
+                    onClick={bag}
+                  >
                     Add
                   </button>
                 </div>
@@ -154,8 +164,8 @@ export const ShowProduct = () => {
             {product.status}
           </span>
           <span className="fw-bold fs-5">Description</span>
-          {/* <p>{product.description}</p> */}
-          <p>{description}</p>
+          <p>{product.description}</p>
+          {/* <p>{description}</p> */}
           <span className="mt-3 fw-bold fs-5">Product Review</span>
           <hr />
           <h2 className="fw-bold">You can also like this</h2>
