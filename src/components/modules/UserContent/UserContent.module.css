@@ -29,3 +29,19 @@
 .changeAddr{
     color: red;
 }
+
+.tableControl{
+    width: 90%;
+}
+
+@media (min-width: 768px) {
+    .tableControl{
+        width: 50%;
+    }
+}
+
+@media (min-width: 992px) {
+    .tableControl{
+        width: 25%;
+    }
+}

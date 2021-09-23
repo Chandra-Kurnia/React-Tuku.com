@@ -1,27 +1,28 @@
-import React, { Fragment, useState, useEffect } from "react";
-import { useParams } from "react-router";
-import { ImageProductGallery } from "../../../components/base/imageProductGallery/ImageProductGallery";
+import React, {Fragment, useState, useEffect} from 'react';
+import {useParams} from 'react-router';
+import {ImageProductGallery} from '../../../components/base/imageProductGallery/ImageProductGallery';
 // eslint-disable-next-line no-unused-vars
-import style from "./ShowProduct.module.css";
-import { ColorPicker } from "../../../components/base/ColorPicker/ColorPicker";
-import { ButtonCount } from "../../../components/base/ButtonCount/ButtonCount";
-import { Card } from "../../../components/modules/Cards/Card";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  addCart,
-  showProduct,
-  showProductByCategory,
-} from "../../../config/redux/actions/productAction";
+import style from './ShowProduct.module.css';
+import {ColorPicker} from '../../../components/base/ColorPicker/ColorPicker';
+import {ButtonCount} from '../../../components/base/ButtonCount/ButtonCount';
+import {Card} from '../../../components/modules/Cards/Card';
+import {useDispatch, useSelector} from 'react-redux';
+import {showProduct, showProductByCategory} from '../../../config/redux/actions/productAction';
+import { addCart } from '../../../config/redux/actions/cartAction';
+import {Link} from 'react-router-dom';
+import {useHistory} from 'react-router';
 
 export const ShowProduct = () => {
+  const history = useHistory();
   const dispatch = useDispatch();
-  const { id } = useParams();
+  const {id} = useParams();
   const [count, setCount] = useState(1);
-  const { products, product } = useSelector((state) => state.product);
-  const { cart } = useSelector((state) => state.cart);
+  const {products, product} = useSelector((state) => state.product);
+  // const {cart} = useSelector((state) => state.cart);
+  const {profile} = useSelector((state) => state.user);
 
   useEffect(() => {
-    dispatch(showProduct(id));
+    dispatch(showProduct(id, history));
     dispatch(showProductByCategory(product.category));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -52,41 +53,26 @@ export const ShowProduct = () => {
 
   const bag = () => {
     dispatch(addCart(productCart));
-    console.log(cart);
   };
 
   return (
     <Fragment>
       <div className="container">
         <span className="d-inline-block mt-5 mb-5">
-          <a href="/">Home</a> &#62; Category &#62; <b>{product.category}</b>
+          <Link to="/">Home</Link> &#62; Category &#62; <b>{product.category}</b>
         </span>
         <div className="row">
           <div className="col-lg-4">
             <div className={`row image-product-main`}>
-              <img
-                src={`http://localhost:4000/file/${product.image}`}
-                className="rounded"
-                alt=""
-              />
+              <img src={`${process.env.REACT_APP_SERVER_IMAGE_URL}/${product.image}`} className="rounded" alt="" />
             </div>
             <div className={`row image-product-small`}>
               <div className={`gallery d-flex justify-content-between`}>
-                <ImageProductGallery
-                  srcImage={`http://localhost:4000/file/${product.image}`}
-                />
-                <ImageProductGallery
-                  srcImage={`http://localhost:4000/file/${product.image}`}
-                />
-                <ImageProductGallery
-                  srcImage={`http://localhost:4000/file/${product.image}`}
-                />
-                <ImageProductGallery
-                  srcImage={`http://localhost:4000/file/${product.image}`}
-                />
-                <ImageProductGallery
-                  srcImage={`http://localhost:4000/file/${product.image}`}
-                />
+                <ImageProductGallery srcImage={`${process.env.REACT_APP_SERVER_IMAGE_URL}/${product.image}`} />
+                <ImageProductGallery srcImage={`${process.env.REACT_APP_SERVER_IMAGE_URL}/${product.image}`} />
+                <ImageProductGallery srcImage={`${process.env.REACT_APP_SERVER_IMAGE_URL}/${product.image}`} />
+                <ImageProductGallery srcImage={`${process.env.REACT_APP_SERVER_IMAGE_URL}/${product.image}`} />
+                <ImageProductGallery srcImage={`${process.env.REACT_APP_SERVER_IMAGE_URL}/${product.image}`} />
               </div>
             </div>
           </div>
@@ -121,38 +107,31 @@ export const ShowProduct = () => {
                 <br />
                 <span className="fs-3">{product.size}</span>
               </div>
-              <div className="col">
-                <span className={`${style.quantity} fw-bold`}>Quantity</span>
-                <ButtonCount
-                  count={count}
-                  plus={() => handlePlusCount()}
-                  minus={() => handleMinusCount()}
-                />
-              </div>
+              {profile.role === 'customer' && (
+                <div className="col">
+                  <span className={`${style.quantity} fw-bold`}>Quantity</span>
+                  <ButtonCount count={count} plus={() => handlePlusCount()} minus={() => handleMinusCount()} />
+                </div>
+              )}
             </div>
             <div className={`row pt-5 ${style.btnwrapp}`}>
-              <div className="pt-5 d-flex justify-content-between">
-                <div className="col-3 pe-2">
-                  <button className="btn btn-outline-secondary rounded-pill w-100">
-                    Chat
-                  </button>
+              {profile.role === 'customer' && (
+                <div className="pt-5 d-flex justify-content-between">
+                  <div className="col-3 pe-2">
+                    <button className="btn btn-outline-secondary rounded-pill w-100">Chat</button>
+                  </div>
+                  <div className="col-3 pe-2">
+                    <button className="btn btn-outline-secondary rounded-pill w-100" onClick={bag}>
+                      Add
+                    </button>
+                  </div>
+                  <div className="col-6 pe-2">
+                    <button className={`btn btn-outline-secondary rounded-pill w-100 ${style.btnBuy}`} onClick={bag}>
+                      Buy
+                    </button>
+                  </div>
                 </div>
-                <div className="col-3 pe-2">
-                  <button
-                    className="btn btn-outline-secondary rounded-pill w-100"
-                    onClick={bag}
-                  >
-                    Add
-                  </button>
-                </div>
-                <div className="col-6 pe-2">
-                  <button
-                    className={`btn btn-outline-secondary rounded-pill w-100 ${style.btnBuy}`}
-                  >
-                    Buy
-                  </button>
-                </div>
-              </div>
+              )}
             </div>
           </div>
         </div>
@@ -160,11 +139,13 @@ export const ShowProduct = () => {
           <h2>Informasi Product</h2>
           <span className="mt-3 fw-bold fs-5">Condition</span>
           <br />
-          <span style={{ color: "red" }} className="d-block mb-5">
+          <span style={{color: 'red'}} className="d-block mb-5">
             {product.status}
           </span>
           <span className="fw-bold fs-5">Description</span>
-          <p>{product.description}</p>
+          <p>
+            <>{product.description}</>
+          </p>
           {/* <p>{description}</p> */}
           <span className="mt-3 fw-bold fs-5">Product Review</span>
           <hr />

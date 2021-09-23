@@ -1,16 +1,14 @@
 import React from "react";
 import style from "./Sidebar.module.css";
-// import { StoreContent } from "../../../components/modules/StoreContent/StoreContent";
 import avatar from "../../../assets/images/profiles/avatar/avatar.jpg";
 import editProfile from "../../../assets/icon/edit-profile.svg";
 import home from "../../../assets/icon/home.svg"
 import packageIcon from "../../../assets/icon/package.svg"
 import shoppingCart from "../../../assets/icon/shopping-cart.svg"
+import { StoreProduct } from "../StoreContent/StoreProduct";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
 
-export const SidebarStore = (props) => {
-  const {profile} = useSelector(state => state.user)
+export const SidebarOrder = () => {
   return (
     <div className="d-flex">
       <input
@@ -24,7 +22,7 @@ export const SidebarStore = (props) => {
           <div className="d-flex">
             <img className={style.avatar} src={avatar} alt="" />
             <div className="">
-              <div className="fw-bold fs-6">{profile.owner}</div>
+              <div className="fw-bold fs-6">Johanes mikael</div>
               <div className="edit ps-1">
                 <img src={editProfile} alt="" />
                 <span className="ps-2">Ubah Profile</span>
@@ -34,7 +32,7 @@ export const SidebarStore = (props) => {
           <div className={`pt-5 ${style.act}`}>
             <ul>
               <li className="position-relative">
-                <input className="toggleStore d-none" type="checkbox" name="" id="toggle-store"/>
+                <input className="toggleStore d-none" type="checkbox" name="" id="toggle-store" />
                 <div className="d-flex align-items-center submenuStoreWrapper">
                   <div className={`${style.circleWrapper} ${style.home} me-2 rounded-circle`}>
                     <img className={style.imgSide} src={home} alt="" />
@@ -49,7 +47,7 @@ export const SidebarStore = (props) => {
                 </ul>
               </li>
               <li className="position-relative">
-                <input className="toggleProduct d-none" type="checkbox" name="" id="toggle-product" />
+                <input className="toggleProduct d-none" type="checkbox" name="" id="toggle-product" checked/>
                 <div className="d-flex align-items-center submenuProductWrapper">
                   <div className={`${style.circleWrapper} ${style.package} me-2 rounded-circle`}>
                     <img className={style.imgSide} src={packageIcon} alt="" />
@@ -77,11 +75,11 @@ export const SidebarStore = (props) => {
                 </div>
                 <ul className="submenuOrder">
                   <li className="ms-4 ps-3">
-                    <Link to="/storeorder">My Order</Link>
+                    <Link to="#">My Order</Link>
                   </li>
-                  {/* <li className="ms-4 ps-3">
-                    <Link to="">Order Cancel</Link>
-                  </li> */}
+                  <li className="ms-4 ps-3">
+                    <Link to="#">Order Cancel</Link>
+                  </li>
                 </ul>
               </li>
             </ul>
@@ -89,8 +87,7 @@ export const SidebarStore = (props) => {
         </div>
       </div>
       <div className={`ps-3 pt-5 pe-3 ${style.contentWrapper}`}>
-        {/* <StoreContent /> */}
-        {props.children}
+        <StoreProduct/>
       </div>
     </div>
   );

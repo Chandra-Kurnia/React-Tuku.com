@@ -6,8 +6,8 @@ export const TableItem = (props) => {
   const idProduct = props.idProduct;
   function confirmDelete() {
     swal({
-      title: "Apakah anda yakin?",
-      text: "Data ini akan dihapus dari store anda !",
+      title: "Are you sure?",
+      text: "This data will deleted from your store !",
       icon: "warning",
       buttons: true,
       dangerMode: true,

@@ -20,6 +20,9 @@ import PrivateRoute from "./PrivateRoute";
 import PublicRoute from "./PublicRoute";
 import { ShippingAdress } from "../pages/Profile/ShippingAddress/ShippingAddress";
 import { MyOrder } from "../pages/Profile/MyOrders/MyOrder";
+import GlobalRoute from "./GlobalRoute";
+import { storeOrder } from "../pages/Store/StoreOrders/StoreOrders";
+import { Checkout } from "../pages/Invoice/Checkout/Checkout";
 
 export class router extends Component {
   render() {
@@ -30,33 +33,35 @@ export class router extends Component {
             {/* Auth */}
             <PublicRoute exact path="/login" component={Login} />
             <PublicRoute exact path="/signup" component={SignUp} />
-            <Route exact path="/activateAccount" component={Activation} />
-            <Route
+            <PublicRoute exact path="/activateAccount" component={Activation} />
+            <PublicRoute
               exact
               path="/activationSuccess"
               component={ActivationSucess}
             />
-            <Route exact path="/forgotPassword" component={ForgotPassword} />
-            <Route exact path="/ConfirmPassword" component={ConfirmPassword} />
+            <PublicRoute exact path="/forgotPassword" component={ForgotPassword} />
+            <PublicRoute exact path="/ConfirmPassword" component={ConfirmPassword} />
             {/* Main customer*/}
-            <PrivateRoute exact path="/" component={Home} />
-            <PrivateRoute
+            <GlobalRoute exact path="/" component={Home}/>
+            <GlobalRoute
               exact
               path="/category/:category"
               component={ShowByCategory}
             />
-            <PrivateRoute exact path="/search/" component={SearchProduct} />
-            <PrivateRoute exact path="/product/:id" component={ShowProduct} />
+            <GlobalRoute exact path="/search/" component={SearchProduct} />
+            <GlobalRoute exact path="/product/:id" component={ShowProduct} />
             {/* Customer */}
             <PrivateRoute exact path="/MyBag" component={MyBag} />
-            <Route exact path="/profile" component={MyAccount} />
-            <Route exact path="/myAddress" component={ShippingAdress} />
-            <Route exact path="/order" component={MyOrder} />
+            <PrivateRoute exact path="/profile" component={MyAccount} />
+            <PrivateRoute exact path="/myAddress" component={ShippingAdress} />
+            <PrivateRoute exact path="/order" component={MyOrder} />
+            <PrivateRoute exact path="/checkout" component={Checkout}/>
             {/* Seller */}
-            <Route exact path="/store" component={StoreProfile} />
-            <Route exact path="/Product" component={MyProducts} />
-            <Route exact path="/Product/Update/:id" component={UpdateProduct} />
-            <Route exact path="/Sell" component={SellingProduct} />
+            <PrivateRoute role='seller' exact path="/store" component={StoreProfile} />
+            <PrivateRoute role='seller' exact path="/Product" component={MyProducts} />
+            <PrivateRoute role='seller' exact path="/Product/Update/:id" component={UpdateProduct} />
+            <PrivateRoute role='seller' exact path="/Sell" component={SellingProduct} />
+            <PrivateRoute role='seller' exact path="/storeorder" component={storeOrder} />
           </Route>
         </Switch>
       </BrowserRouter>

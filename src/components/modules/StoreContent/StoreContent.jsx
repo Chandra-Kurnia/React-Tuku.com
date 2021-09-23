@@ -11,8 +11,9 @@ export const StoreContent = () => {
   const history = useHistory()
   const dispatch = useDispatch()
   const { profile } = useSelector((state) => state.user);
+  console.log(profile);
   if(profile.role !== "seller"){
-    dispatch(logout(history));
+    history.push('/')
   }
   const [form, setform] = useState({
     storeName: profile.store_name,

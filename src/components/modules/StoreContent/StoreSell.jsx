@@ -7,7 +7,7 @@ import { LoaderPage } from "../../base/LoaderPage/LoaderPage";
 import { Editor } from "@tinymce/tinymce-react";
 import { useDispatch, useSelector } from "react-redux";
 import { createProduct } from "../../../config/redux/actions/productAction";
-import { logout } from "../../../config/redux/actions/userAction";
+// import { logout } from "../../../config/redux/actions/userAction";
 
 export const StoreSell = () => {
   const token = localStorage.getItem("token");
@@ -18,7 +18,8 @@ export const StoreSell = () => {
   // const [Loading, setLoading] = useState(false);
   const history = useHistory();
   if (profile.role !== "seller") {
-    dispatch(logout(history));
+    // dispatch(logout(history));
+    history.push('/')
   }
   const [title, setTitle] = useState("");
   const [price, setprice] = useState("");
@@ -29,6 +30,7 @@ export const StoreSell = () => {
   const [condition, setcondition] = useState("");
   const [image, setimage] = useState();
   const [desc, setdesc] = useState("");
+  const [previewImage, setpreviewImage] = useState()
 
   let dataProduct = {
     productName: title,
@@ -45,6 +47,7 @@ export const StoreSell = () => {
 
   const handleImage = (e) => {
     setimage(e.target.files[0]);
+    setpreviewImage(URL.createObjectURL(e.target.files[0]))
   };
 
   const handleSave = () => {
@@ -176,7 +179,7 @@ export const StoreSell = () => {
           className="container p-4"
           style={{ border: "3px dashed var(--customGrey)" }}
         >
-          <img src="" alt="" style={{ width: "300px" }} />
+          <img src={previewImage} alt="" style={{ width: "300px" }} />
           <hr />
           {/* <input
             type="text"
@@ -190,6 +193,7 @@ export const StoreSell = () => {
               id="inputFile"
               className="d-none"
               onChange={handleImage}
+              accept='image/png'
             />
             <label
               htmlFor="inputFile"

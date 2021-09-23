@@ -5,6 +5,7 @@ import style from "./ShowByCategory.module.css";
 import { Card } from "../../../components/modules/Cards/Card";
 import { showProductByCategory } from "../../../config/redux/actions/productAction";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 export const ShowByCategory = () => {
   const dispatch = useDispatch()
@@ -21,7 +22,7 @@ export const ShowByCategory = () => {
     <Fragment>
       <div className="container mt-5">
         <span className="d-inline-block mb-5">
-          <a href="/">Home</a> &#62; Category &#62; <b>{category}</b>
+          <Link to="/">Home</Link> &#62; Category &#62; <b>{category}</b>
         </span>
         <h1 className="fw-bold">{category}</h1>
         <div className="cards d-flex flex-wrap">

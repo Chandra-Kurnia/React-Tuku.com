@@ -5,16 +5,16 @@ import axios from "axios";
 import arrowOrder from "../../../assets/icon/arrowOrder.svg";
 import { LoaderPage } from "../../base/LoaderPage/LoaderPage";
 import swal from "sweetalert";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
-import { logout } from "../../../config/redux/actions/userAction";
+// import { logout } from "../../../config/redux/actions/userAction";
 
 export const StoreProduct = () => {
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
   const history = useHistory()
   const { profile } = useSelector((state) => state.user);
   if(profile.role !== "seller"){
-    dispatch(logout(history));
+    history.push('/')
   }
   const token = localStorage.getItem('token')
   const [Loading, setLoading] = useState(false);

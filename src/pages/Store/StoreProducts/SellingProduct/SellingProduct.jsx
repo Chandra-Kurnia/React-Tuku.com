@@ -1,12 +1,14 @@
 import React, { Fragment } from 'react'
-import { NavbarStore } from '../../../../components/modules/NavbarStore/NavbarStore'
-import { SidebarSell } from '../../../../components/modules/SidebarStore/SidebarSell'
+// import { SidebarSell } from '../../../../components/modules/SidebarStore/SidebarSell'
+import { SidebarStore } from '../../../../components/modules/SidebarStore/SidebarStore'
+import { StoreSell } from '../../../../components/modules/StoreContent/StoreSell'
 
 export const SellingProduct = () => {
     return (
         <Fragment>
-            <NavbarStore/>
-            <SidebarSell/>
+            <SidebarStore>
+                <StoreSell/>
+            </SidebarStore>
         </Fragment>
     )
 }

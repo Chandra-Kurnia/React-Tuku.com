@@ -12,7 +12,7 @@ export const UserContent = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   if(profile.role !== "customer"){
-    dispatch(logout(history));
+    history.push('/')
   }
   const [form, setform] = useState({
     name: profile.name,

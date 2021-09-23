@@ -20,15 +20,20 @@ export const showProductByCategory = (category) => async (dispatch) => {
       dispatch({ type: "showProductByCategory", payload: res.data.data });
     })
     .catch((err) => {
-      console.log(err);
+      console.log(err.response);
     });
 };
 
-export const showProduct = (id) => async (dispatch) => {
+export const showProduct = (id, history) => async (dispatch) => {
   await axios
     .get(`${process.env.REACT_APP_SERVER_URL}/product/show/${id}`)
     .then((res) => {
-      dispatch({ type: "showProduct", payload: res.data.data[0] });
+      if(!res.data.data){
+        dispatch({ type: "showProduct", payload: {} });
+        history.push('/')
+      }else{
+        dispatch({ type: "showProduct", payload: res.data.data[0] });
+      }
     })
     .catch((err) => {
       console.log(err);
@@ -84,9 +89,3 @@ export const createProduct =
         console.log(err.response);
       });
   };
-
-export const addCart = (product) => async (dispatch, getState) => {
-  const {cart: newItemCart} = getState().cart;
-  newItemCart.push(product)
-  dispatch({type: 'addCart', payload: newItemCart})
-};

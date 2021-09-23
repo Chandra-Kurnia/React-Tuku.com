@@ -1,13 +1,14 @@
 import React from 'react'
-import { NavbarStore } from '../../../../components/modules/NavbarStore/NavbarStore'
-import { SidebarProduct } from '../../../../components/modules/SidebarStore/SidebarProduct'
+import { SidebarStore } from '../../../../components/modules/SidebarStore/SidebarStore'
+import { StoreProduct } from '../../../../components/modules/StoreContent/StoreProduct'
 
 export const MyProducts = () => {
     return (
         <div>
             <div className="bg-wrapper">
-                <NavbarStore/>
-                <SidebarProduct/>
+                <SidebarStore>
+                    <StoreProduct/>
+                </SidebarStore>
             </div>
         </div>
     )

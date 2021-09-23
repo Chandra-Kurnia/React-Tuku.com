@@ -7,7 +7,7 @@ export const NavbarStore = () => {
   return (
     <nav className="shadow navbar navbar-expand-lg navbar-light bg-light pt-3 pb-3">
       <div className="container-nav container">
-        <NavbarLogos path="/store"/>
+        <NavbarLogos path="/"/>
         <button
           className={`navbar-toggler ${style.btnTogler}`}
           type="button"
@@ -27,7 +27,7 @@ export const NavbarStore = () => {
           <ul
             className={`navbar-nav d-flex justify-content-lg-end justify-content-around flex-row pt-lg-0 pt-3 ${style.navItemWrapper}`}
           >
-            <li className="nav-item d-inline-block ps-lg-5 ps-2">
+            {/* <li className="nav-item d-inline-block ps-lg-5 ps-2">
               <a href="#/">
                 <i className="fa fa-bell"></i>
               </a>
@@ -36,7 +36,7 @@ export const NavbarStore = () => {
               <a href="#/">
                 <i className="fa fa-envelope"></i>
               </a>
-            </li>
+            </li> */}
             <li className="nav-item d-inline-block ps-lg-5 ps-2">
               <a href="#/">
                 <label htmlFor="sidebar-toggle">

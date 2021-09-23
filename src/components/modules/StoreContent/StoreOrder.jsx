@@ -1,44 +1,58 @@
-/* eslint-disable array-callback-return */
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react';
-import style from './UserContent.module.css';
+import style from '../UserContent/UserContent.module.css';
 import {OrderItem} from '../../base/TableItem/OrderItem';
-import {useEffect, useState} from 'react';
 import axios from 'axios';
+import {useState, useEffect} from 'react';
 import swal from 'sweetalert';
+import Pagination from 'rc-pagination';
+import 'rc-pagination/assets/index.css';
 
-export const UserOrder = () => {
+export const StoreOrder = () => {
   const token = localStorage.getItem('token');
-  const [orders, setorders] = useState([]);
+  const [orders, setorders] = useState();
+  const [sort, setsort] = useState('desc');
+  const [limit, setlimit] = useState(5);
+  const [pagination, setpagination] = useState();
+
   useEffect(() => {
-    getHistory()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    getHistory();
+  }, [sort, limit]);
 
   const getHistory = () => {
     axios
-      .get(`${process.env.REACT_APP_SERVER_URL}/order/getorder`, {
+      .get(`${process.env.REACT_APP_SERVER_URL}/order/getorder?order=${sort}&limit=${limit}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
       .then((result) => {
         setorders(result.data.data);
+        setpagination(result.data.pagination);
       })
       .catch(() => {
         swal('Error', 'Failed get data order, please try again later', 'error');
       });
-  }
+  };
 
-  const handleComplete = (orderId) => {
-    axios.post(`${process.env.REACT_APP_SERVER_URL}/order/updateorder`, {orderId, status: 'completed'})
-    .then(() => {
-      swal('Success', 'Order successfully updated', 'success')
-      getHistory()
-    })
-    .catch(err => {
-      swal('Error', 'Error update orde, please try again later', 'error')
-    })
-  }
+  const handlePagination = (e) => {
+    setpagination({...pagination, currentPage: e});
+    getHistory()
+  };
+
+  const hanldeUpdateOrder = (orderId, e) => {
+    axios
+      .post(`${process.env.REACT_APP_SERVER_URL}/order/updateorder`, {status: e.target.value, orderId})
+      .then(() => {
+        swal('Success', 'Data successfully updated', 'success');
+        getHistory();
+      })
+      .catch((err) => {
+        console.log(err);
+        swal('Error', 'Update data failed', 'error');
+      });
+  };
+
   return (
     <div className={`container pt-3 ${style.content}`}>
       <h2>My Order</h2>
@@ -96,26 +110,26 @@ export const UserOrder = () => {
         {/* Table control */}
         <div className="d-flex flex-column flex-lg-row">
           {/* Order */}
-          <div className={`${style.tableControl} w-25 ms-2 mt-2 mb-2`}>
+          <div className={`${style.tableControl} ms-2 mt-2 mb-2`}>
             <span>Order : </span>
             <select
               className={`${style.InputTableControl} form-select`}
               aria-label="Default select example"
-              // onChange={(e) => handleOrder(e)}
+              onChange={(e) => setsort(e.target.value)}
             >
-              <option value="ASC" selected>
-                Ascending
+              <option value="ASC">Ascending</option>
+              <option value="DESC" selected>
+                Descending
               </option>
-              <option value="DESC">Descending</option>
             </select>
           </div>
           {/* Amount of data */}
-          <div className={`${style.tableControl} w-25 ms-2 mt-2 mb-2`}>
+          <div className={`${style.tableControl} ms-2 mt-2 mb-2`}>
             <span>Amount of data : </span>
             <select
               className={`${style.InputTableControl} form-select`}
               aria-label="Default select example"
-              // onChange={(e) => setlimit(e.target.value)}
+              onChange={(e) => setlimit(e.target.value)}
             >
               <option value="5">5 data / page</option>
               <option value="10">10 data / page</option>
@@ -123,9 +137,9 @@ export const UserOrder = () => {
             </select>
           </div>
           {/* Page */}
-          <div className={`${style.tableControl} w-25 ms-2 mt-2 mb-2`}>
-            <span>Page 1 of 1 page</span>
-            <select
+          <div className={`${style.tableControl} ms-2 mb-2`} style={{"margin-top": "40px"}}>
+            {/* <span>Page {pagination && pagination.currentPage} of 1 page</span> */}
+            {/* <select
               className={`${style.InputTableControl} form-select`}
               aria-label="Default select example"
               // onChange={(e) => setPage(e.target.value)}
@@ -133,7 +147,15 @@ export const UserOrder = () => {
               <option>a</option>
               <option>a</option>
               <option>a</option>
-            </select>
+            </select> */}
+            {pagination && (
+              <Pagination
+                onChange={(e) => handlePagination(e)}
+                pageSize={pagination.limit}
+                current={pagination.currentPage}
+                total={pagination.countData}
+              />
+            )}
           </div>
         </div>
         {/* Table */}
@@ -142,7 +164,7 @@ export const UserOrder = () => {
             <tr>
               <th style={{width: '25%', position: 'relative'}}>Invoice number</th>
               <th style={{width: '15%', position: 'relative'}}>Price</th>
-              <th style={{width: '10%', position: 'relative'}}>Status</th>
+              <th style={{width: '10%', position: 'relative'}}>Payment</th>
               <th style={{width: '20%', position: 'relative'}}>Time</th>
               <th style={{width: '20%'}}>Action</th>
             </tr>
@@ -154,9 +176,10 @@ export const UserOrder = () => {
                   key={index}
                   invoice_number={order.invoice_number}
                   price={order.totalPrice}
-                  status={order.status}
+                  status={order.payment}
                   time={order.created_at}
-                  handleComplete={() => handleComplete(order.id_orders)}
+                  statusOrder={order.status}
+                  handleupdate={(e) => hanldeUpdateOrder(order.id_orders, e)}
                 />
               ))}
           </tbody>

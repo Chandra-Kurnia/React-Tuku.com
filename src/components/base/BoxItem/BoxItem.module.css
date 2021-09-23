@@ -21,3 +21,8 @@
     text-align: right;
     color: black;
 }
+
+.trashicon{
+    width: 25px;
+    cursor: pointer;
+}

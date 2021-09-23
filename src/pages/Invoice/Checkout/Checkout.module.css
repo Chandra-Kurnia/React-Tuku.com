@@ -1,0 +1,64 @@
+.btnDelete{
+    position: absolute;
+    background-color: white;
+    border: none;
+    color: var(--primary);
+    right: 15px;
+}
+
+.btnBuy{
+    background-color: var(--primary);
+    color: white;
+}
+
+.btnBuy:hover{
+    background-color: var(--primaryHover);
+    color: white;
+}
+
+.blackText{
+    color: black;
+}
+
+.item{
+    width: 75%;
+}
+
+.sideItem{
+    width: 25%;
+}
+
+.payment{
+    margin-top: 20px;
+    width: 100%;
+    height: 40px;
+    background-color: #ffff;
+    border: 1px solid gray;
+    border-radius: 10px;
+    color: gray;
+    padding-left: 10px;
+}
+
+.address{
+    width: 100%;
+    margin-bottom: 10px;
+    resize: none;
+    border: 1px solid gray;
+    border-radius: 10px;
+    padding: 20px;
+    font-size: 15px;
+}
+
+.address:focus{
+    outline: none;
+}
+
+@media (max-width: 575.98px) {
+    .item{
+        width: 100%;
+    }
+
+    .sideItem{
+        width: 100%;
+    }
+}
