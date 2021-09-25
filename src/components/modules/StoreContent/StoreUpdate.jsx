@@ -1,35 +1,26 @@
-import React, { Fragment, useEffect, useState, useRef } from "react";
-import style from "./storeContent.module.css";
-import { Input } from "../../base/Input/Input";
-import { ColorPicker } from "../../base/ColorPicker/ColorPicker";
-import axios from "axios";
-import { useHistory } from "react-router";
-import swal from "sweetalert";
-import { LoaderPage } from "../../base/LoaderPage/LoaderPage";
-import { Editor } from "@tinymce/tinymce-react";
+import React, {Fragment, useEffect, useState, useRef} from 'react';
+import style from './storeContent.module.css';
+import {Input} from '../../base/Input/Input';
+import {ColorPicker} from '../../base/ColorPicker/ColorPicker';
+import axios from 'axios';
+import {useHistory} from 'react-router';
+import swal from 'sweetalert';
+import {LoaderPage} from '../../base/LoaderPage/LoaderPage';
+import {Editor} from '@tinymce/tinymce-react';
 
 export const StoreUpdate = (props) => {
   const editorRef = useRef(null);
   const [Loading, setLoading] = useState(false);
   const move = useHistory();
-  const { idProduct } = props;
+  const {idProduct} = props;
+  const token = localStorage.getItem('token');
   const getData = () => {
     axios
-      .get(`http://localhost:4000/v1/product/show/${idProduct}`)
+      .get(`${process.env.REACT_APP_SERVER_URL}/product/show/${idProduct}`)
       .then((response) => {
         // setresponse.data.data[0]);
-        const {
-          product_name,
-          price,
-          quantity,
-          size,
-          id_category,
-          category,
-          color,
-          status,
-          image,
-          description,
-        } = response.data.data[0];
+        const {product_name, price, quantity, size, id_category, category, color, status, image, description} =
+          response.data.data[0];
         setTitle(product_name);
         setprice(price);
         setstock(quantity);
@@ -51,16 +42,17 @@ export const StoreUpdate = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const [title, setTitle] = useState("");
-  const [price, setprice] = useState("");
-  const [stock, setstock] = useState("");
-  const [size, setSize] = useState("");
-  const [idCategory, setidCategory] = useState("");
-  const [ctg, setCategory] = useState("");
-  const [color, setcolor] = useState("");
-  const [condition, setcondition] = useState("");
-  const [image, setimage] = useState("");
-  const [desc, setdesc] = useState("");
+  const [title, setTitle] = useState('');
+  const [price, setprice] = useState('');
+  const [stock, setstock] = useState('');
+  const [size, setSize] = useState('');
+  const [idCategory, setidCategory] = useState('');
+  const [ctg, setCategory] = useState('');
+  const [color, setcolor] = useState('');
+  const [condition, setcondition] = useState('');
+  const [image, setimage] = useState('');
+  const [desc, setdesc] = useState('');
+  const [previewImage, setpreviewImage] = useState('')
 
   const dataProduct = {
     productName: title,
@@ -77,39 +69,40 @@ export const StoreUpdate = (props) => {
 
   const handleImage = (e) => {
     setimage(e.target.files[0]);
+    setpreviewImage(URL.createObjectURL(e.target.files[0]))
   };
 
   const handleUpdate = () => {
-    console.log(dataProduct);
     const formData = new FormData();
-    formData.append("productName", dataProduct.productName);
-    formData.append("store_id", dataProduct.store_id);
-    formData.append("category", dataProduct.category);
-    formData.append("color", dataProduct.color);
-    formData.append("size", dataProduct.size);
-    formData.append("price", dataProduct.price);
-    formData.append("quantity", dataProduct.quantity);
-    formData.append("status", dataProduct.status);
-    formData.append("description", dataProduct.description);
-    formData.append("image", dataProduct.image);
-    console.log(formData);
+    formData.append('productName', dataProduct.productName);
+    formData.append('store_id', dataProduct.store_id);
+    formData.append('category', dataProduct.category);
+    formData.append('color', dataProduct.color);
+    formData.append('size', dataProduct.size);
+    formData.append('price', dataProduct.price);
+    formData.append('quantity', dataProduct.quantity);
+    formData.append('status', dataProduct.status);
+    formData.append('description', dataProduct.description);
+    formData.append('image', dataProduct.image);
     axios
-      .put(`${process.env.REACT_APP_SERVER_URL}/product/${idProduct}`, formData)
+      .put(`${process.env.REACT_APP_SERVER_URL}/product/${idProduct}`, formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       .then(() => {
-        swal("Success", "Data Successfully updated", "success").then(
-          (value) => {
-            if (value | (value === false)) {
-              setLoading(true);
-              setTimeout(() => {
-                move.push("/product");
-                setLoading(false);
-              }, 300);
-            }
+        swal('Success', 'Data Successfully updated', 'success').then((value) => {
+          if (value | (value === false)) {
+            setLoading(true);
+            setTimeout(() => {
+              move.push('/product');
+              setLoading(false);
+            }, 300);
           }
-        );
+        });
       })
       .catch((err) => {
-        swal("Failed", err.response.data.error[0].msg, "error");
+        swal('Failed', err.response.data.error[0].msg, 'error');
       });
   };
 
@@ -121,12 +114,7 @@ export const StoreUpdate = (props) => {
         <hr />
         <span>Name Of Goods</span>
         <div className="w-50">
-          <Input
-            name="titleProduct"
-            value={(e) => setTitle(e.target.value)}
-            val={title}
-            useRef="title"
-          />
+          <Input name="titleProduct" value={(e) => setTitle(e.target.value)} val={title} useRef="title" />
         </div>
       </div>
       <div className={`container mt-3 pt-3 pb-5 ${style.content}`}>
@@ -134,20 +122,11 @@ export const StoreUpdate = (props) => {
         <hr />
         <span>Unit Price</span>
         <div className="w-50">
-          <Input
-            name="price"
-            value={(e) => setprice(e.target.value)}
-            val={price}
-          />
+          <Input name="price" value={(e) => setprice(e.target.value)} val={price} />
         </div>
         <span>Stock</span>
         <div className="w-50">
-          <Input
-            name="stock"
-            value={(e) => setstock(e.target.value)}
-            type="number"
-            val={stock}
-          />
+          <Input name="stock" value={(e) => setstock(e.target.value)} type="number" val={stock} />
         </div>
         <div className="w-50 mb-3">
           <div className="d-flex">
@@ -193,32 +172,16 @@ export const StoreUpdate = (props) => {
           </div>
           <div className="d-flex w-50 align-items-center text-center mt-5">
             <div className="w-25">
-              <ColorPicker
-                type="radio"
-                color="Black"
-                value={(e) => setcolor(e.target.value)}
-              />
+              <ColorPicker type="radio" color="Black" value={(e) => setcolor(e.target.value)} />
             </div>
             <div className="w-25">
-              <ColorPicker
-                type="radio"
-                color="DarkPrimary"
-                value={(e) => setcolor(e.target.value)}
-              />
+              <ColorPicker type="radio" color="DarkPrimary" value={(e) => setcolor(e.target.value)} />
             </div>
             <div className="w-25">
-              <ColorPicker
-                type="radio"
-                color="darkBlue"
-                value={(e) => setcolor(e.target.value)}
-              />
+              <ColorPicker type="radio" color="darkBlue" value={(e) => setcolor(e.target.value)} />
             </div>
             <div className="w-25">
-              <ColorPicker
-                type="radio"
-                color="lightGreen"
-                value={(e) => setcolor(e.target.value)}
-              />
+              <ColorPicker type="radio" color="lightGreen" value={(e) => setcolor(e.target.value)} />
             </div>
           </div>
         </div>
@@ -249,35 +212,22 @@ export const StoreUpdate = (props) => {
       <div className={`container mt-3 pt-3 pb-5 ${style.content}`}>
         <h2>Photo of goods</h2>
         <hr />
-        <div
-          className="container p-4"
-          style={{ border: "3px dashed var(--customGrey)" }}
-        >
-          {/* <img
-            src={`${process.env.REACT_APP_SERVER_IMAGE_URL}/${image}`}
+        <div className="container p-4" style={{border: '3px dashed var(--customGrey)'}}>
+          <img
+            src={previewImage === '' ? `${process.env.REACT_APP_SERVER_IMAGE_URL}/${image}` : previewImage}
             alt=""
             style={{ width: "300px" }}
-          /> */}
+          />
           <hr />
-          {/* <input
-            type="text"
-            className="form-control mb-3"
-            defaultValue={urlImage}
-            onChange={(e) => setUrlImage(e.target.value)}
-          /> */}
           <div className="text-center">
             <input
-              // value={`${process.env.REACT_APP_SERVER_IMAGE_URL}/${image}`}
               type="file"
               name=""
               id="inputFile"
               className="d-none"
               onChange={handleImage}
             />
-            <label
-              htmlFor="inputFile"
-              className="btn btn-outline-secondary rounded-pill"
-            >
+            <label htmlFor="inputFile" className="btn btn-outline-secondary rounded-pill">
               Upload Foto
             </label>
           </div>
@@ -291,21 +241,18 @@ export const StoreUpdate = (props) => {
             textareaName="description"
             onEditorChange={(e) => setdesc(e)}
             onInit={(evt, editor) => (editorRef.current = editor)}
-            initialValue={desc}
+            // initialValue={desc}
+            value={desc}
             init={{
               height: 500,
               menubar: false,
               plugins: [
-                "advlist autolink lists link image charmap print preview anchor",
-                "searchreplace visualblocks code fullscreen",
-                "insertdatetime media table paste code help wordcount",
+                'advlist autolink lists link image charmap print preview anchor',
+                'searchreplace visualblocks code fullscreen',
+                'insertdatetime media table paste code help wordcount',
               ],
-              toolbar:
-                "undo redo | " +
-                "bold italic backcolor | " +
-                "bullist numlist | ",
-              content_style:
-                "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
+              toolbar: 'undo redo | ' + 'bold italic backcolor | ' + 'bullist numlist | ',
+              content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
             }}
           />
         </div>
@@ -314,9 +261,9 @@ export const StoreUpdate = (props) => {
         <button
           className="btn rounded-pill mt-2"
           style={{
-            backgroundColor: "var(--primary",
-            width: "200px",
-            color: "white",
+            backgroundColor: 'var(--primary',
+            width: '200px',
+            color: 'white',
           }}
           onClick={() => handleUpdate()}
         >

@@ -145,7 +145,7 @@ export const ShowProduct = () => {
           </span>
           <span className="fw-bold fs-5">Description</span>
           <p>
-            <>{product.description}</>
+            {product.description}
           </p>
           {/* <p>{description}</p> */}
           <span className="mt-3 fw-bold fs-5">Product Review</span>
