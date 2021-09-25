@@ -2,7 +2,8 @@ const initialState = {
     orders: {
       totalPrice: 0,
       payment: '',
-      address: ''
+      address: '',
+      store_id: ''
     }
   };
   
@@ -12,7 +13,8 @@ const initialState = {
         return{
           ...state,
           orders: {
-            totalPrice: action.payload
+            totalPrice: action.payload.totalPrice,
+            store_id: action.payload.store_id
           }
         }
       case "createorder" :

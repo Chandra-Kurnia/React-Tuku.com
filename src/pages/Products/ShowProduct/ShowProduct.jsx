@@ -46,6 +46,7 @@ export const ShowProduct = () => {
     id_product: product.id_product,
     product_name: product.product_name,
     image: product.image,
+    store_id: product.store_id,
     store_name: product.store_name,
     quantity: count,
     price: product.price * count,

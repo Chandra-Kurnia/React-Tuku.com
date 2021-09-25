@@ -17,11 +17,11 @@ export const StoreOrder = () => {
 
   useEffect(() => {
     getHistory();
-  }, [sort, limit]);
+  }, [sort, limit, pagination && pagination.curentPage]);
 
   const getHistory = () => {
     axios
-      .get(`${process.env.REACT_APP_SERVER_URL}/order/getorder?order=${sort}&limit=${limit}`, {
+      .get(`${process.env.REACT_APP_SERVER_URL}/order/getorder?order=${sort}&limit=${limit}${pagination ? '&page='+pagination.curentPage : ''}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -36,8 +36,7 @@ export const StoreOrder = () => {
   };
 
   const handlePagination = (e) => {
-    setpagination({...pagination, currentPage: e});
-    getHistory()
+    setpagination({...pagination, curentPage: e});
   };
 
   const hanldeUpdateOrder = (orderId, e) => {
@@ -138,21 +137,11 @@ export const StoreOrder = () => {
           </div>
           {/* Page */}
           <div className={`${style.tableControl} ms-2 mb-2`} style={{"margin-top": "40px"}}>
-            {/* <span>Page {pagination && pagination.currentPage} of 1 page</span> */}
-            {/* <select
-              className={`${style.InputTableControl} form-select`}
-              aria-label="Default select example"
-              // onChange={(e) => setPage(e.target.value)}
-            >
-              <option>a</option>
-              <option>a</option>
-              <option>a</option>
-            </select> */}
-            {pagination && (
+            {pagination && pagination.countData && (
               <Pagination
                 onChange={(e) => handlePagination(e)}
                 pageSize={pagination.limit}
-                current={pagination.currentPage}
+                current={pagination.curentPage}
                 total={pagination.countData}
               />
             )}

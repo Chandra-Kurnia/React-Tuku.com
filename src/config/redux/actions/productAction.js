@@ -2,8 +2,11 @@ import axios from "axios";
 import swal from "sweetalert";
 
 export const getProduct = () => async (dispatch) => {
+  const token = localStorage.getItem('token')
   await axios
-    .get(`${process.env.REACT_APP_SERVER_URL}/product`)
+    .get(`${process.env.REACT_APP_SERVER_URL}/product`, {headers: {
+      Authorization: `Bearer ${token}`,
+    }})
     .then((res) => {
       console.log();
       dispatch({ type: "getAllProduct", payload: res.data.data });

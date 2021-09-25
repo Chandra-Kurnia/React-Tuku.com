@@ -35,7 +35,7 @@ export const StoreProduct = () => {
     setorderBy(ord);
   };
 
-  let link = `${process.env.REACT_APP_SERVER_URL}/product/?order=${order}&orderBy=${orderBy}&page=${page}`;
+  let link = `${process.env.REACT_APP_SERVER_URL}/product/getByStore/?order=${order}&orderBy=${orderBy}&page=${page}`;
 
   if (limit !== "") {
     link += `&limit=${limit}`;
@@ -62,15 +62,20 @@ export const StoreProduct = () => {
 
   const getAllData = () => {
     axios
-      .get(link)
+      .get(link, { headers: {
+        Authorization: `Bearer ${token}`,
+      }})
       .then((response) => {
+        console.log(response);
         setData(response.data.data);
       })
       .catch((err) => {
         console.log(err);
       });
 
-    axios.get(`${process.env.REACT_APP_SERVER_URL}/product`).then((response) => {
+    axios.get(`${process.env.REACT_APP_SERVER_URL}/product/getByStore`, { headers: {
+      Authorization: `Bearer ${token}`,
+    }}).then((response) => {
       setTotalData(response.data.amount);
     });
   };
@@ -264,7 +269,7 @@ export const StoreProduct = () => {
                     click={(e) => handleDelete(e)}
                   />
                 ))
-              : "DATA NOT FOUND"}
+              : <h1>No data product found</h1>}
           </tbody>
         </table>
       </div>

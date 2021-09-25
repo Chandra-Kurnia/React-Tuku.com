@@ -5,10 +5,16 @@ import {OrderItem} from '../../base/TableItem/OrderItem';
 import {useEffect, useState} from 'react';
 import axios from 'axios';
 import swal from 'sweetalert';
+import Pagination from 'rc-pagination';
+import 'rc-pagination/assets/index.css';
 
 export const UserOrder = () => {
   const token = localStorage.getItem('token');
   const [orders, setorders] = useState([]);
+  const [sort, setsort] = useState('desc')
+  const [limit, setlimit] = useState(5)
+  const [pagination, setpagination] = useState()
+
   useEffect(() => {
     getHistory()
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -16,13 +22,14 @@ export const UserOrder = () => {
 
   const getHistory = () => {
     axios
-      .get(`${process.env.REACT_APP_SERVER_URL}/order/getorder`, {
+      .get(`${process.env.REACT_APP_SERVER_URL}/order/getorder?order=${sort}&limit=${limit}${pagination ? '&page='+pagination.curentPage : ''}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
       .then((result) => {
         setorders(result.data.data);
+        setpagination(result.data.pagination);
       })
       .catch(() => {
         swal('Error', 'Failed get data order, please try again later', 'error');
@@ -101,7 +108,7 @@ export const UserOrder = () => {
             <select
               className={`${style.InputTableControl} form-select`}
               aria-label="Default select example"
-              // onChange={(e) => handleOrder(e)}
+              onChange={(e) => setsort(e.target.value)}
             >
               <option value="ASC" selected>
                 Ascending
@@ -115,7 +122,7 @@ export const UserOrder = () => {
             <select
               className={`${style.InputTableControl} form-select`}
               aria-label="Default select example"
-              // onChange={(e) => setlimit(e.target.value)}
+              onChange={(e) => setlimit(e.target.value)}
             >
               <option value="5">5 data / page</option>
               <option value="10">10 data / page</option>
@@ -124,16 +131,14 @@ export const UserOrder = () => {
           </div>
           {/* Page */}
           <div className={`${style.tableControl} w-25 ms-2 mt-2 mb-2`}>
-            <span>Page 1 of 1 page</span>
-            <select
-              className={`${style.InputTableControl} form-select`}
-              aria-label="Default select example"
-              // onChange={(e) => setPage(e.target.value)}
-            >
-              <option>a</option>
-              <option>a</option>
-              <option>a</option>
-            </select>
+            {pagination && pagination.countData > 0 && (
+              <Pagination
+                onChange={(e) => setpagination({...pagination, curentPage: e})}
+                pageSize={pagination.limit}
+                current={pagination.curentPage}
+                total={pagination.countData}
+              />
+            )}
           </div>
         </div>
         {/* Table */}
@@ -161,6 +166,7 @@ export const UserOrder = () => {
               ))}
           </tbody>
         </table>
+        {orders && orders.length > 0 ? '' : (<h1>You dont have order</h1>)}
       </div>
     </div>
   );

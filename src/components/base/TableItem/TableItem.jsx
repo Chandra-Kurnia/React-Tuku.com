@@ -15,8 +15,6 @@ export const TableItem = (props) => {
     .then((willDelete) => {
       if (willDelete) {
         props.click(idProduct)
-      } else {
-        swal("Delete Dibatalkan!");
       }
     });
   }
