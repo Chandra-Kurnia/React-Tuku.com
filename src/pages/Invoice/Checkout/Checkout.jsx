@@ -39,7 +39,7 @@ export const Checkout = () => {
   }
 
   const handleOrder = () => {
-    dispatch(createOrder(dataOrder))
+    dispatch(createOrder(dataOrder, history))
   }
 
   return (

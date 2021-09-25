@@ -1,7 +1,7 @@
 import swal from "sweetalert";
 import axios from "axios";
 
-export const createOrder = (dataOrder) => async(dispatch, getState) => {
+export const createOrder = (dataOrder, history) => async(dispatch, getState) => {
     const token = localStorage.getItem('token')
     const {cart: cartUser} = getState().cart;
     const {orders: ordersUser} = getState().orders;
@@ -14,9 +14,13 @@ export const createOrder = (dataOrder) => async(dispatch, getState) => {
     axios.post(`${process.env.REACT_APP_SERVER_URL}/order/createorder`, dataOrderUser, {headers: {
         Authorization: `Bearer ${token}`,
       }})
-    .then((result) => {
-        console.log(result.data.data);
+    .then(() => {
+        dispatch({type: 'updateCart', payload: []});
+        dispatch({type: 'removeorder', payload: {totalPrice: 0, payment: '', address: '', store_id: ''}});
         swal('Success', 'Order success', 'success')
+        .then(() => {
+            history.push('/order')
+        })
     })
     .catch(err => {
         swal('Error', 'Order Failed, try again later', 'error')

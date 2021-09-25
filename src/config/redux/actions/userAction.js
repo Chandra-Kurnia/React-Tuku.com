@@ -73,7 +73,7 @@ export const update = (data, role, id) => async (dispatch) => {
 export const logout = (history) => async (dispatch) => {
   dispatch({type: 'logout'});
   dispatch({type: 'updateCart', payload: []});
-  dispatch({type: 'removeorder', payload: {totalPrice: 0, payment: '', address: ''}});
+  dispatch({type: 'removeorder', payload: {totalPrice: 0, payment: '', address: '', store_id: ''}});
   localStorage.removeItem('token');
   swal('Success', 'Logout success', 'success').then(() => {
     history.push('/');
