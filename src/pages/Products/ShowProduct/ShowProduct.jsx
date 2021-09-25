@@ -21,7 +21,6 @@ export const ShowProduct = () => {
   const {products, product} = useSelector((state) => state.product);
   // const {cart} = useSelector((state) => state.cart);
   const {profile} = useSelector((state) => state.user);
-  const descriptionProduct = new DOMParser().parseFromString(product.description, "text/html")
 
   useEffect(() => {
     dispatch(showProduct(id, history));
