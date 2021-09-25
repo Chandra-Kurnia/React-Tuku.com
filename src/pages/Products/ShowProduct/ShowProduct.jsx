@@ -11,6 +11,7 @@ import {showProduct, showProductByCategory} from '../../../config/redux/actions/
 import { addCart } from '../../../config/redux/actions/cartAction';
 import {Link} from 'react-router-dom';
 import {useHistory} from 'react-router';
+import parse from 'html-react-parser'
 
 export const ShowProduct = () => {
   const history = useHistory();
@@ -20,6 +21,7 @@ export const ShowProduct = () => {
   const {products, product} = useSelector((state) => state.product);
   // const {cart} = useSelector((state) => state.cart);
   const {profile} = useSelector((state) => state.user);
+  const descriptionProduct = new DOMParser().parseFromString(product.description, "text/html")
 
   useEffect(() => {
     dispatch(showProduct(id, history));
@@ -145,7 +147,7 @@ export const ShowProduct = () => {
           </span>
           <span className="fw-bold fs-5">Description</span>
           <p>
-            {product.description}
+            {parse(product.description)}
           </p>
           {/* <p>{description}</p> */}
           <span className="mt-3 fw-bold fs-5">Product Review</span>
