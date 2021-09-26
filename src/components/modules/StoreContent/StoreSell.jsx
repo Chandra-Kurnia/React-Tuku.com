@@ -193,7 +193,7 @@ export const StoreSell = () => {
               id="inputFile"
               className="d-none"
               onChange={handleImage}
-              accept='image/png'
+              accept='image/png/jpg/jpeg'
             />
             <label
               htmlFor="inputFile"

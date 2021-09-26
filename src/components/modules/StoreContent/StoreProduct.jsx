@@ -20,7 +20,7 @@ export const StoreProduct = () => {
   const [Loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
   const [keyword, setKeyword] = useState("");
-  const [order, setOrder] = useState("ASC");
+  const [order, setOrder] = useState("DESC");
   const [limit, setlimit] = useState(5);
   const [orderBy, setorderBy] = useState("id_product");
   const [page, setPage] = useState("");
@@ -172,10 +172,10 @@ export const StoreProduct = () => {
               aria-label="Default select example"
               onChange={(e) => handleOrder(e)}
             >
-              <option value="ASC" selected>
+              <option value="ASC">
                 Ascending
               </option>
-              <option value="DESC">Descending</option>
+              <option value="DESC" selected>Descending</option>
             </select>
           </div>
           {/* Amount of data */}
