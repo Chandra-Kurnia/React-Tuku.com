@@ -7,8 +7,10 @@ import packageIcon from "../../../assets/icon/package.svg"
 import shoppingCart from "../../../assets/icon/shopping-cart.svg"
 import { StoreProduct } from "../StoreContent/StoreProduct";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export const SidebarOrder = () => {
+  const {profile} = useSelector(state => state.user)
   return (
     <div className="d-flex">
       <input
@@ -20,7 +22,7 @@ export const SidebarOrder = () => {
       <div className={`${style.side}`}>
         <div className="d-flex flex-column">
           <div className="d-flex">
-            <img className={style.avatar} src={avatar} alt="" />
+            <img className={style.avatar} src={profile.avatar ? `${process.env.REACT_APP_API}${profile.avatar}` : avatar} alt="" />
             <div className="">
               <div className="fw-bold fs-6">Johanes mikael</div>
               <div className="edit ps-1">

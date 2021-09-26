@@ -71,11 +71,13 @@ export const NavbarLogin = () => {
             : 
               <Link to="/store">
                 <label htmlFor="sidebar-toggle">
+                  <div className={style.avatarWrapper}>
                   <img
                     src={profile.avatar ? `${process.env.REACT_APP_API}${profile.avatar}` : avatar}
                     className={`rounded-circle ${style.imageAvatar}`}
                     alt=""
                   />
+                  </div>
                 </label>
               </Link>
             }

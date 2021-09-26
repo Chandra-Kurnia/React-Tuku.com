@@ -2,8 +2,10 @@ import React from "react";
 import { NavbarLogos } from "../../base/NavbarLogos/NavbarLogos";
 import style from "./NavbarStore.module.css";
 import avatar from "../../../assets/images/profiles/avatar/avatar.png";
+import { useSelector } from "react-redux";
 
 export const NavbarStore = () => {
+  const {profile} = useSelector(state => state.user)
   return (
     <nav className="shadow navbar navbar-expand-lg navbar-light bg-light pt-3 pb-3">
       <div className="container-nav container">
@@ -41,7 +43,7 @@ export const NavbarStore = () => {
               <a href="#/">
                 <label htmlFor="sidebar-toggle">
                   <img
-                    src={avatar}
+                    src={profile.avatar ? `${process.env.REACT_APP_API}${profile.avatar}` : avatar}
                     className={`rounded-circle ${style.imageAvatar}`}
                     alt=""
                   />

@@ -11,15 +11,15 @@ export const StoreContent = () => {
   const history = useHistory()
   const dispatch = useDispatch()
   const { profile } = useSelector((state) => state.user);
-  console.log(profile);
   if(profile.role !== "seller"){
     history.push('/')
   }
   const [form, setform] = useState({
-    storeName: profile.store_name,
+    store_name: profile.store_name,
     email: profile.email,
-    phoneNumber: profile.phone_number,
-    storeDesc: profile.store_desc,
+    phone_number: profile.phone_number,
+    store_desc: profile.store_desc,
+    avatar: ''
   })
 
   const handleForm = (e) => {
@@ -29,8 +29,15 @@ export const StoreContent = () => {
     })
   }
 
+  const handleAvatar = (e) => {
+    setform({
+      ...form,
+      avatar: e.target.files[0]
+    })
+  }
+
   const handleSave = (e) => {
-    dispatch(update(form, "seller", history, profile.store_id))
+    dispatch(update(form, "seller", profile.store_id))
   }
 
   const handleLogout = () => {
@@ -48,7 +55,7 @@ export const StoreContent = () => {
               <span>Store Name</span>
             </div>
             <div className="col-9">
-              <AuthInput name="storeName" value={profile.store_name} event={handleForm}/>
+              <AuthInput name="store_name" value={profile.store_name} event={handleForm}/>
             </div>
           </div>
           <div className="row">
@@ -64,7 +71,7 @@ export const StoreContent = () => {
               <span>Phone Number</span>
             </div>
             <div className="col-9">
-              <AuthInput name="phoneNumber" value={profile.phone_number} event={handleForm}/>
+              <AuthInput name="phone_number" value={profile.phone_number} event={handleForm}/>
             </div>
           </div>
           <div className="row">
@@ -72,7 +79,7 @@ export const StoreContent = () => {
               <span>Store Description</span>
             </div>
             <div className="col-9">
-              <textarea devaultValue={profile.store_desc} className={style.textarea} name="storeDesc" id="" cols="30" rows="10" onChange={handleForm}></textarea>
+              <textarea value={form.store_desc} className={style.textarea} name="store_desc" id="" cols="30" rows="10" onChange={handleForm}></textarea>
             </div>
           </div>
 
@@ -85,8 +92,9 @@ export const StoreContent = () => {
           </div>
         </div>
         <div className={`col-4 d-flex align-items-center flex-column ${style.profile}`}>
-            <img className="rounded-circle" src={avatar} alt="" />
-            <button className="btn btn-outline-secondary mt-3 rounded-pill">Select Image</button>
+            <img className="rounded-circle" src={form.avatar ? URL.createObjectURL(form.avatar) : profile.avatar ? `${process.env.REACT_APP_API}${profile.avatar}` : avatar} alt="" />
+            <label for='avatar' className="btn btn-outline-secondary mt-3 rounded-pill">Select Image</label>
+            <input id='avatar' type="file" className='d-none' accept="image/jpeg, image/png" onChange={handleAvatar}/>
             <button className="btn btn-outline-danger mt-3 rounded-pill" onClick={() => handleLogout()}>log out now!</button>
         </div>
       </div>

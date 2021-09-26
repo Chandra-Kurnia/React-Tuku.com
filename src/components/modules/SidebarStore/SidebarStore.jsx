@@ -22,7 +22,7 @@ export const SidebarStore = (props) => {
       <div className={`${style.side}`}>
         <div className="d-flex flex-column">
           <div className="d-flex">
-            <img className={style.avatar} src={avatar} alt="" />
+            <img className={style.avatar} src={profile.avatar ? `${process.env.REACT_APP_API}${profile.avatar}` : avatar} alt="" />
             <div className="">
               <div className="fw-bold fs-6">{profile.owner}</div>
               <div className="edit ps-1">

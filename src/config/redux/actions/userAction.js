@@ -50,32 +50,38 @@ export const activate = (role, token) => async (dispatch) => {
 
 export const update = (data, role, id) => async (dispatch) => {
   const formData = new FormData()
-  formData.append('name', data.name)
-  formData.append('email', data.email)
-  formData.append('phone_number', data.phone_number)
-  formData.append('sex', data.sex)
-  formData.append('dateBirth', data.dateBirth)
-  formData.append('monthBirth', data.monthBirth)
-  formData.append('yearBirth', data.yearBirth)
-  formData.append('avatar', data.avatar)
-  // for (let [key, value] of formData.entries()) {
-  //   console.log(`${key}: ${value}`);
-  // }
   if (role === 'seller') {
+    formData.append('store_name', data.store_name)
+    formData.append('email', data.email)
+    formData.append('phone_number', data.phone_number)
+    formData.append('store_desc', data.store_desc)
+    formData.append('avatar', data.avatar)
     await axios
       .put(`${process.env.REACT_APP_SERVER_URL}/store/${id}`, formData)
-      .then(() => {
+      .then((result) => {
+        const newDataStore = result.data.data
+        console.log(newDataStore);
+        localStorage.setItem('token', newDataStore.token)
+        delete newDataStore.token
+        dispatch({type: 'getProfile', payload: result.data});
         swal('Success', 'Succesfully updated data store', 'success');
       })
       .catch((err) => {
         swal('Failed', err.response.data.error[0].msg, 'error');
       });
   } else {
+    formData.append('name', data.name)
+    formData.append('email', data.email)
+    formData.append('phone_number', data.phone_number)
+    formData.append('sex', data.sex)
+    formData.append('dateBirth', data.dateBirth)
+    formData.append('monthBirth', data.monthBirth)
+    formData.append('yearBirth', data.yearBirth)
+    formData.append('avatar', data.avatar)
     await axios
       .put(`${process.env.REACT_APP_SERVER_URL}/users/${id}`, formData)
       .then((result) => {
         const newDataUser = result.data.data
-        console.log(newDataUser);
         localStorage.setItem('token', newDataUser.token)
         delete newDataUser.token
         dispatch({type: 'getProfile', payload: result.data});
