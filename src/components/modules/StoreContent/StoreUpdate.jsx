@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-concat */
 import React, {Fragment, useEffect, useState, useRef} from 'react';
 import style from './storeContent.module.css';
 import {Input} from '../../base/Input/Input';

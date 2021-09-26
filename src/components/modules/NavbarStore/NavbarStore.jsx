@@ -1,7 +1,7 @@
 import React from "react";
 import { NavbarLogos } from "../../base/NavbarLogos/NavbarLogos";
 import style from "./NavbarStore.module.css";
-import avatar from "../../../assets/images/profiles/avatar/avatar.jpg";
+import avatar from "../../../assets/images/profiles/avatar/avatar.png";
 
 export const NavbarStore = () => {
   return (

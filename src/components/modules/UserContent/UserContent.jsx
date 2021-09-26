@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { AuthInput } from "../../base/AuthInput/AuthInput";
 import style from "./UserContent.module.css";
 import { ButtonNavbarAuth } from "../../../components/base/ButtonNavbarAuth/ButtonNavbarAuth";
-import avatar from "../../../assets/images/profiles/avatar/avatar.jpg";
+import avatar from "../../../assets/images/profiles/avatar/avatar.png";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import { logout, update } from "../../../config/redux/actions/userAction";
@@ -14,6 +14,7 @@ export const UserContent = () => {
   if(profile.role !== "customer"){
     history.push('/')
   }
+
   const [form, setform] = useState({
     name: profile.name,
     email: profile.email,
@@ -21,14 +22,23 @@ export const UserContent = () => {
     sex: profile.sex,
     dateBirth: 1,
     monthBirth: 6,
-    yearBirth: 1999
+    yearBirth: 1999,
+    avatar: ''
   });
+
   const handleForm = (e) => {
     setform({
       ...form,
       [e.target.name]: e.target.value,
     });
   };
+
+  const handleAvatar = (e) => {
+    setform({
+      ...form,
+      avatar: e.target.files[0],
+    });
+  }
   const handleLogout = () => {
     dispatch(logout(history));
   };
@@ -68,7 +78,7 @@ export const UserContent = () => {
             </div>
             <div className="col-9">
               <AuthInput
-                name="phoneNumber"
+                name="phone_number"
                 value={profile.phone_number}
                 event={handleForm}
               />
@@ -78,6 +88,7 @@ export const UserContent = () => {
             <div className="col-3 d-flex justify-content-end align-items-center">
               <span>Gender</span>
             </div>
+            {profile.sex === 'MALE' ? 
             <div className="col-9">
               <input
                 className="me-2"
@@ -99,6 +110,51 @@ export const UserContent = () => {
               />
               <label htmlFor="female">Perempuan</label>
             </div>
+            : profile.sex === 'FEMALE' ?
+            <div className="col-9">
+              <input
+                className="me-2"
+                type="radio"
+                name="sex"
+                id="male"
+                value="male"
+                onChange={handleForm}
+              />
+              <label htmlFor="male">Laki - Laki</label>
+              <input
+                className="ms-5 me-2"
+                type="radio"
+                name="sex"
+                id="female"
+                value="female"
+                onChange={handleForm}
+                defaultChecked
+              />
+              <label htmlFor="female">Perempuan</label>
+            </div>
+            :
+            <div className="col-9">
+              <input
+                className="me-2"
+                type="radio"
+                name="sex"
+                id="male"
+                value="male"
+                onChange={handleForm}
+              />
+              <label htmlFor="male">Laki - Laki</label>
+              <input
+                className="ms-5 me-2"
+                type="radio"
+                name="sex"
+                id="female"
+                value="female"
+                onChange={handleForm}
+              />
+              <label htmlFor="female">Perempuan</label>
+            </div>
+            
+          }
           </div>
           <div className="row mb-3">
             <div className="col-3 d-flex justify-content-end align-items-center">
@@ -199,10 +255,13 @@ export const UserContent = () => {
         <div
           className={`col-4 d-flex align-items-center flex-column ${style.profile}`}
         >
-          <img className="rounded-circle" src={avatar} alt="" />
-          <button className="btn btn-outline-secondary mt-3 rounded-pill">
+          <div className={style.avatarWrapper}>
+          <img className={`rounded-circle ${style.avatar}`} src={form.avatar === '' ? profile.avatar ? `${process.env.REACT_APP_API}${profile.avatar}` : avatar : URL.createObjectURL(form.avatar)} alt="" />
+          </div>
+          <label for='avatar' className="btn btn-outline-secondary mt-3 rounded-pill">
             Select Image
-          </button>
+          </label>
+          <input type="file" name="avatar" id="avatar" accept="image/jpeg, image/png" onChange={handleAvatar}/>
           <button
             className="btn btn-outline-danger mt-3 rounded-pill"
             onClick={() => handleLogout()}

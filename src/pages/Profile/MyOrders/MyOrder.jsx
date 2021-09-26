@@ -1,11 +1,14 @@
 import React from 'react'
 import style from './MyOrder.module.css'
-import { SidebarOrder } from '../../../components/modules/Sidebar/SidebarOrder'
+import { Sidebar } from '../../../components/modules/Sidebar/Sidebar'
+import { UserOrder } from '../../../components/modules/UserContent/UserOrder'
 
 export const MyOrder = () => {
     return (
         <div className={`${style.wrapper}`}>
-            <SidebarOrder/>
+            <Sidebar>
+                <UserOrder/>
+            </Sidebar>
         </div>
     )
 }

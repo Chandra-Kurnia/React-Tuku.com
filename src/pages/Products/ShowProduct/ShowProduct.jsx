@@ -1,4 +1,4 @@
-import React, {Fragment, useState, useEffect} from 'react';
+import React, {Fragment, useState, useEffect, useRef} from 'react';
 import {useParams} from 'react-router';
 import {ImageProductGallery} from '../../../components/base/imageProductGallery/ImageProductGallery';
 // eslint-disable-next-line no-unused-vars
@@ -8,12 +8,13 @@ import {ButtonCount} from '../../../components/base/ButtonCount/ButtonCount';
 import {Card} from '../../../components/modules/Cards/Card';
 import {useDispatch, useSelector} from 'react-redux';
 import {showProduct, showProductByCategory} from '../../../config/redux/actions/productAction';
-import { addCart } from '../../../config/redux/actions/cartAction';
+import {addCart} from '../../../config/redux/actions/cartAction';
 import {Link} from 'react-router-dom';
 import {useHistory} from 'react-router';
-import parse from 'html-react-parser'
+import parse from 'html-react-parser';
 
 export const ShowProduct = () => {
+  const TopComponent = useRef(null);
   const history = useHistory();
   const dispatch = useDispatch();
   const {id} = useParams();
@@ -25,8 +26,13 @@ export const ShowProduct = () => {
   useEffect(() => {
     dispatch(showProduct(id, history));
     dispatch(showProductByCategory(product.category));
+    scrollToTop()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [product.category, id]);
+
+  const scrollToTop = () => {
+    TopComponent.current?.scrollIntoView({behavior: 'smooth'});
+  };
 
   const handlePlusCount = () => {
     if (count < product.quantity) {
@@ -59,7 +65,7 @@ export const ShowProduct = () => {
 
   return (
     <Fragment>
-      <div className="container">
+      <div className="container" ref={TopComponent}>
         <span className="d-inline-block mt-5 mb-5">
           <Link to="/">Home</Link> &#62; Category &#62; <b>{product.category}</b>
         </span>
@@ -145,9 +151,7 @@ export const ShowProduct = () => {
             {product.status}
           </span>
           <span className="fw-bold fs-5">Description</span>
-          <p>
-            {parse(product.description)}
-          </p>
+          <p>{product.description && parse(product.description)}</p>
           {/* <p>{description}</p> */}
           <span className="mt-3 fw-bold fs-5">Product Review</span>
           <hr />

@@ -5,7 +5,7 @@ import { NavbarSearch } from "../../base/NavbarSearch/NavbarSearch";
 // eslint-disable-next-line no-unused-vars
 import style from "./NavbarLogin.module.css";
 import { NavbarTrolly } from "../../base/NavbarTrolly/NavbarTrolly";
-import avatar from "../../../assets/images/profiles/avatar/avatar.jpg";
+import avatar from "../../../assets/images/profiles/avatar/avatar.png";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -59,18 +59,20 @@ export const NavbarLogin = () => {
               {profile.role === 'customer' ? 
               <Link to="/profile">
                 <label htmlFor="sidebar-toggle">
+                  <div className={style.avatarWrapper}>
                   <img
-                    src={avatar}
+                    src={profile.avatar ? `${process.env.REACT_APP_API}${profile.avatar}` : avatar}
                     className={`rounded-circle ${style.imageAvatar}`}
                     alt=""
                   />
+                  </div>
                 </label>
               </Link>
             : 
               <Link to="/store">
                 <label htmlFor="sidebar-toggle">
                   <img
-                    src={avatar}
+                    src={profile.avatar ? `${process.env.REACT_APP_API}${profile.avatar}` : avatar}
                     className={`rounded-circle ${style.imageAvatar}`}
                     alt=""
                   />

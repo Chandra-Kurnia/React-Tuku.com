@@ -1,6 +1,6 @@
 import React from "react";
 import style from "./Sidebar.module.css";
-import avatar from "../../../assets/images/profiles/avatar/avatar.jpg";
+import avatar from "../../../assets/images/profiles/avatar/avatar.png";
 import editProfile from "../../../assets/icon/edit-profile.svg"
 import user from "../../../assets/icon/user.png"
 import loc from "../../../assets/icon/loc.png"

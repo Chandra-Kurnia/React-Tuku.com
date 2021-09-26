@@ -1,11 +1,14 @@
 import React from 'react'
 import style from './ShippingAdress.module.css'
-import { SidebarAddress } from '../../../components/modules/Sidebar/SidebarAddress'
+import { Sidebar } from '../../../components/modules/Sidebar/Sidebar'
+import { UserAddress } from '../../../components/modules/UserContent/UserAddress'
 
 export const ShippingAdress = () => {
     return (
         <div className={`${style.wrapper}`}>
-            <SidebarAddress/>
+            <Sidebar>
+                <UserAddress/>
+            </Sidebar>
         </div>
     )
 }

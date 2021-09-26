@@ -1,7 +1,6 @@
 import React from "react";
 import style from "./Sidebar.module.css";
-import { UserContent } from "../UserContent/UserContent";
-import avatar from "../../../assets/images/profiles/avatar/avatar.jpg";
+import avatar from "../../../assets/images/profiles/avatar/avatar.png";
 import editProfile from "../../../assets/icon/edit-profile.svg"
 import user from "../../../assets/icon/user.png"
 import loc from "../../../assets/icon/loc.png"
@@ -9,7 +8,7 @@ import clipboard from "../../../assets/icon/clipboard.png"
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-export const Sidebar = () => {
+export const Sidebar = (props) => {
   const { profile } = useSelector((state) => state.user);
   return (
     <div className="d-flex">
@@ -22,7 +21,9 @@ export const Sidebar = () => {
       <div className={`${style.side}`}>
         <div className="d-flex flex-column">
           <div className="d-flex">
-            <img className={style.avatar} src={avatar} alt="" />
+            <div className={style.avatarWrapper}>
+            <img className={style.avatar} src={profile.avatar ? `${process.env.REACT_APP_API}${profile.avatar}` : avatar} alt="" />
+            </div>
             <div className="">
               <div className="fw-bold fs-6">{profile.name}</div>
               <div className="edit ps-1">
@@ -38,7 +39,7 @@ export const Sidebar = () => {
                   <div className={`rounded-circle me-3 ${style.circleWrapper} ${style.circleProfile}`}>
                     <img className={style.imgSide} src={user} alt="" />
                   </div>
-                  <div className={`d-flex align-items-center sidebarActive`}>My Account</div>
+                  <div className={`d-flex align-items-center`}>My Account</div>
                 </Link>
               </li>
               <li>
@@ -62,7 +63,8 @@ export const Sidebar = () => {
         </div>
       </div>
       <div className={`ps-3 pt-5 pe-3 ${style.contentWrapper}`}>
-        <UserContent />
+        {/* <UserContent /> */}
+        {props.children}
       </div>
     </div>
   );

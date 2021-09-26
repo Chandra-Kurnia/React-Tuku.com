@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import { AuthInput } from "../../base/AuthInput/AuthInput";
 import style from "./storeContent.module.css";
 import { ButtonNavbarAuth } from "../../base/ButtonNavbarAuth/ButtonNavbarAuth";
-import avatar from "../../../assets/images/profiles/avatar/avatar.jpg"
+import avatar from "../../../assets/images/profiles/avatar/avatar.png"
 import { useDispatch, useSelector } from "react-redux";
 import { logout, update } from "../../../config/redux/actions/userAction";
 import { useHistory } from "react-router";

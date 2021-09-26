@@ -1,7 +1,7 @@
 import React from "react";
 import style from "./Sidebar.module.css";
 // import { StoreContent } from "../../../components/modules/StoreContent/StoreContent";
-import avatar from "../../../assets/images/profiles/avatar/avatar.jpg";
+import avatar from "../../../assets/images/profiles/avatar/avatar.png";
 import editProfile from "../../../assets/icon/edit-profile.svg";
 import home from "../../../assets/icon/home.svg"
 import packageIcon from "../../../assets/icon/package.svg"

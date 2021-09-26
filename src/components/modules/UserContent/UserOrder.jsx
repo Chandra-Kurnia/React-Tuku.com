@@ -130,7 +130,7 @@ export const UserOrder = () => {
             </select>
           </div>
           {/* Page */}
-          <div className={`${style.tableControl} w-25 ms-2 mt-2 mb-2`}>
+          <div className={`${style.tableControl} w-25 ms-2 mt-2 mb-2 pt-4`}>
             {pagination && pagination.countData > 0 && (
               <Pagination
                 onChange={(e) => setpagination({...pagination, curentPage: e})}
