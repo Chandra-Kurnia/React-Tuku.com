@@ -95,7 +95,7 @@ npm install
 4. Edit env in next.configs.js for API server
 
 ```sh
-REACT_APP_SERVER_URL= [version api] 'http://localhost:4000/v1'
+REACT_APP_SERVER_URL= [api version] 'http://localhost:4000/v1'
 REACT_APP_SERVER_IMAGE_URL= [api image url] 'http://localhost:4000/file'
 REACT_APP_API=[api url] 'http://localhost:4000'
 ```
@@ -108,7 +108,7 @@ npm start
 
 ### Related Project
 
-* [`Frontend Tuku.com`](https://react-tuku-com.vercel.app/)
+* [`Frontend Tuku.com`](https://github.com/Chandra-Kurnia/React-Tuku.com)
 * [`Backend Tuku.com`](https://github.com/Chandra-Kurnia/BackEnd-express-Tuku.com)
 
 <br/>
