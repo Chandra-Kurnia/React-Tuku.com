@@ -12,7 +12,7 @@
     <a href="https://github.com/Chandra-Kurnia/React-Tuku.com"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/Chandra-Kurnia/React-Tuku.com">View Demo</a>
+    <a href="http://react-tuku-com.vercel.app/">View Demo</a>
     ·
     <a href="https://github.com/Chandra-Kurnia/React-Tuku.com">Report Bug</a>
     ·
